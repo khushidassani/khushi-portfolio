@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Khushi Dassani — Brand Strategist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ── EDIT GUIDE ────────────────────────────────────────────
+   To change text: find the comment // EDIT: and update the text next to it
+   To change a photo: replace the background-image URL in the .img-* class
+   Photo format: background-image:url('YOUR_IMAGE_URL_HERE')
+   ────────────────────────────────────────────────────────── */
+:root{
+  --b:#6B1F2A;--bd:#4A1219;--s:#7A8C6E;--sl:#A8B89A;
+  --cr:#F5F0E8;--w:#FAF7F2;--ch:#2C2520;--g:#C4A882;--gl:#D4BC9A;
+  --tan:#C8B99A;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--w);color:var(--ch);font-family:'Cormorant Garamond',serif;cursor:none;overflow-x:hidden}
+#cur,#curR{position:fixed;pointer-events:none;border-radius:50%;transform:translate(-50%,-50%);z-index:9999}
+#cur{width:7px;height:7px;background:var(--b)}
+#curR{width:26px;height:26px;border:1px solid var(--b);opacity:.4;z-index:9998;transition:transform .3s,opacity .3s}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:20px 5vw;display:flex;justify-content:space-between;align-items:center;transition:background .4s}
+nav.sc{background:rgba(250,247,242,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(107,31,42,.06)}
+.nav-logo{font-size:11px;font-family:'Montserrat',sans-serif;letter-spacing:.35em;text-transform:uppercase;color:var(--ch);text-decoration:none}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--ch);text-decoration:none;opacity:.5;transition:opacity .3s}
+.nav-links a:hover{opacity:1}
+
+/* ── HERO ── */
+.hero{height:100vh;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;position:relative}
+
+/* left: full-bleed photo */
+.hero-photo{
+  position:relative;overflow:hidden;
+  /* EDIT: hero background photo */
+  background:#3a2830;
+}
+.hero-photo-bg{
+  position:absolute;inset:0;
+  /* EDIT: set your hero image here */
+  /* background-image:url('your-photo.jpg'); */
+  background-size:cover;background-position:center;
+  background-color:linear-gradient(160deg,#3a2830,#6B1F2A);
+  transition:transform 8s ease;
+}
+.hero-photo:hover .hero-photo-bg{transform:scale(1.04)}
+.hero-photo-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,12,18,.75) 0%,rgba(30,12,18,.1) 60%,transparent 100%)}
+.hero-photo-text{position:absolute;bottom:48px;left:40px;right:40px;z-index:2}
+.hpt-eyebrow{font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.38em;text-transform:uppercase;color:rgba(245,240,232,.45);margin-bottom:10px}
+.hpt-quote{font-size:clamp(28px,4vw,52px);font-weight:300;font-style:italic;color:var(--cr);line-height:1.1}
+.hpt-quote strong{font-style:normal;font-weight:600}
+
+/* floating card on photo — image 1/2 energy */
+.hero-float{
+  position:absolute;top:12%;right:-16px;
+  width:190px;background:var(--cr);
+  padding:14px;z-index:4;
+  transform:rotate(2.5deg);
+  box-shadow:0 8px 40px rgba(44,37,32,.28);
+  opacity:0;animation:cfloat 1s ease .6s forwards;
+}
+@keyframes cfloat{from{opacity:0;transform:rotate(2.5deg) translateY(16px)}to{opacity:1;transform:rotate(2.5deg) translateY(0)}}
+.hf-strip{display:flex;gap:3px;margin-bottom:10px}
+.hf-item{
+  flex:1;aspect-ratio:1;
+  /* EDIT: hero card mini-images */
+  /* background-image:url('img.jpg'); */
+  background-color:rgba(107,31,42,.1);
+  background-size:cover;background-position:center;
+  border:1px solid rgba(107,31,42,.08);
+}
+.hf-label{font-family:'Montserrat',sans-serif;font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--ch);opacity:.45;margin-bottom:3px}
+.hf-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:var(--ch);line-height:1.1}
+.hf-sub{font-family:'Montserrat',sans-serif;font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--b);opacity:.55;margin-top:6px}
+
+/* right: copy panel */
+.hero-copy{background:var(--cr);display:flex;flex-direction:column;justify-content:center;padding:80px 48px;position:relative;overflow:hidden}
+.hero-copy::before{content:'KD';font-family:'Cormorant Garamond',serif;font-size:260px;font-weight:600;font-style:italic;color:rgba(107,31,42,.04);position:absolute;bottom:-40px;right:-16px;line-height:1;pointer-events:none}
+.hc-eyebrow{font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.42em;text-transform:uppercase;color:var(--s);margin-bottom:18px}
+.hc-name{font-size:clamp(52px,8vw,96px);font-weight:300;line-height:.9;color:var(--b);margin-bottom:18px}
+.hc-name em{font-style:italic}
+.hc-rule{width:36px;height:1px;background:var(--g);margin-bottom:18px}
+.hc-tagline{font-size:20px;font-style:italic;color:var(--ch);opacity:.5;margin-bottom:44px;line-height:1.5}
+.hc-stats{display:flex;gap:0;border-top:1px solid rgba(107,31,42,.1)}
+.hc-stat{flex:1;padding:20px 0 0}
+.hc-stat+.hc-stat{border-left:1px solid rgba(107,31,42,.08);padding-left:20px}
+.hc-stat-val{font-size:30px;font-weight:300;font-style:italic;color:var(--b);line-height:1}
+.hc-stat-lbl{font-family:'Montserrat',sans-serif;font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--ch);opacity:.38;margin-top:4px}
+
+/* scroll cue */
+.scroll-cue{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;font-family:'Montserrat',sans-serif;font-size:8px;letter-spacing:.35em;text-transform:uppercase;color:var(--s);cursor:pointer;opacity:0;animation:fup .8s ease 1.2s forwards}
+.scroll-cue::after{content:'';width:1px;height:40px;background:linear-gradient(to bottom,var(--s),transparent);animation:scrl 1.8s ease infinite}
+@keyframes scrl{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ── MARQUEE ── */
+.marquee-wrap{background:var(--b);padding:11px 0;overflow:hidden;white-space:nowrap}
+.marquee-track{display:inline-flex;animation:marq 22s linear infinite}
+.marquee-track span{font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--gl);padding:0 26px}
+.marquee-track .dot{color:var(--g);padding:0 5px}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── ABOUT ── */
+.about{padding:10vh 5vw;display:grid;grid-template-columns:1fr 1.6fr;gap:6vw;align-items:start;max-width:1300px;margin:0 auto}
+.sec-lbl{font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:var(--s);margin-bottom:16px;display:block}
+.about-l h2{font-size:clamp(36px,4vw,52px);font-weight:300;line-height:1.1;color:var(--b)}
+.about-l h2 em{font-style:italic}
+.about-r p{font-size:18px;line-height:1.85;color:var(--ch);opacity:.82;margin-bottom:20px}
+.about-r p:first-child::first-letter{font-size:60px;font-weight:300;float:left;line-height:.8;margin:6px 10px 0 0;color:var(--b)}
+.about-sig{font-size:32px;font-style:italic;color:var(--b);margin-top:28px;opacity:.6}
+
+/* ── WORK ── */
+.work{background:var(--ch);padding:10vh 0 14vh}
+.work-hd{padding:0 5vw;max-width:1300px;margin:0 auto 56px;display:flex;justify-content:space-between;align-items:flex-end}
+.work-hd h2{font-size:clamp(36px,5vw,60px);font-weight:300;color:var(--cr);line-height:1.05}
+.work-hd h2 em{font-style:italic;color:var(--gl)}
+.wlbl{font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.38em;text-transform:uppercase;color:var(--sl);display:block;margin-bottom:12px}
+
+/* ── PROJECT CARDS — Image 3 layout ── */
+.proj-list{max-width:1300px;margin:0 auto;padding:0 5vw;display:flex;flex-direction:column;gap:24px}
+
+.proj{
+  border:1px solid rgba(255,255,255,.06);
+  overflow:hidden;
+  background:rgba(255,255,255,.02);
+}
+
+/* Image 3 layout: big header image + overlapping elements */
+.proj-hero{
+  position:relative;
+  width:100%;
+  height:340px;
+  overflow:hidden;
+}
+.proj-hero-img{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  transition:transform .8s ease;
+}
+.proj:hover .proj-hero-img{transform:scale(1.03)}
+.proj-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(30,12,18,.2) 0%,rgba(30,12,18,.65) 100%)}
+
+/* overlapping nav bar like image 3 */
+.proj-topbar{
+  position:absolute;top:0;left:0;right:0;
+  display:flex;align-items:center;gap:12px;
+  padding:16px 24px;
+  background:rgba(107,31,42,.5);
+  backdrop-filter:blur(8px);
+  z-index:3;
+}
+.proj-topbar-avatar{
+  width:36px;height:36px;border-radius:50%;
+  border:1.5px solid rgba(196,168,130,.5);
+  background:rgba(196,168,130,.15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-style:italic;color:var(--gl);flex-shrink:0;
+}
+.proj-topbar-name{font-size:17px;font-weight:300;color:var(--cr);flex:1}
+.proj-topbar-name em{font-style:italic;color:var(--gl)}
+.proj-topbar-loc{font-family:'Montserrat',sans-serif;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.4)}
+.proj-topbar-badge{
+  background:var(--b);
+  padding:4px 12px;
+  font-family:'Montserrat',sans-serif;font-size:8px;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--gl);
+  white-space:nowrap;
+}
+
+/* bottom of hero: circular thumbnails like image 3 */
+.proj-thumb-row{
+  position:absolute;bottom:16px;left:24px;
+  display:flex;gap:8px;z-index:3;
+  align-items:center;
+}
+.proj-thumb{
+  width:52px;height:52px;border-radius:50%;
+  border:2px solid rgba(196,168,130,.4);
+  overflow:hidden;
+  /* EDIT: project thumbnail images */
+  background-color:rgba(255,255,255,.1);
+  background-size:cover;background-position:center;
+  flex-shrink:0;
+}
+.proj-thumb-add{
+  width:52px;height:52px;border-radius:50%;
+  border:2px dashed rgba(196,168,130,.25);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-family:'Montserrat',sans-serif;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(245,240,232,.25);
+}
+
+/* stat pill on hero bottom-right */
+.proj-hero-stat{
+  position:absolute;bottom:16px;right:24px;
+  background:var(--b);padding:10px 18px;z-index:3;
+}
+.phs-val{font-size:28px;font-weight:300;font-style:italic;color:var(--gl);line-height:1}
+.phs-lbl{font-family:'Montserrat',sans-serif;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,240,232,.45);margin-top:2px}
+
+/* body below hero image — image 3 card grid */
+.proj-body{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:1px;
+  background:rgba(255,255,255,.04);
+}
+
+/* main info card */
+.proj-main{
+  background:rgba(107,31,42,.18);
+  padding:28px 32px;
+}
+.proj-client{font-family:'Montserrat',sans-serif;font-size:8px;letter-spacing:.28em;text-transform:uppercase;color:var(--sl);margin-bottom:10px;display:block}
+.proj-title{font-size:clamp(22px,2.8vw,34px);font-weight:300;color:var(--cr);line-height:1.2;margin-bottom:14px}
+.proj-title em{font-style:italic;color:var(--gl)}
+.proj-desc{font-size:14px;line-height:1.8;color:rgba(245,240,232,.55);margin-bottom:20px}
+.proj-tags{display:flex;flex-wrap:wrap;gap:5px}
+.ptag{font-family:'Montserrat',sans-serif;font-size:7px;letter-spacing:.15em;text-transform:uppercase;border:1px solid rgba(196,168,130,.2);color:var(--gl);padding:3px 9px}
+
+/* side detail card — image 3 right panel */
+.proj-side{
+  background:rgba(255,255,255,.025);
+  padding:28px 28px;
+  display:flex;flex-direction:column;gap:20px;
+}
+.ps-block{}
+.ps-label{font-family:'Montserrat',sans-serif;font-size:8px;letter-spacing:.25em;text-transform:uppercase;color:rgba(245,240,232,.3);margin-bottom:6px}
+.ps-val{font-size:16px;color:rgba(245,240,232,.7);line-height:1.4}
+.ps-val em{font-style:italic;color:var(--gl)}
+.ps-rule{height:1px;background:rgba(255,255,255,.06)}
+
+/* follower-style stat row like image 3 */
+.ps-stats{display:flex;gap:0}
+.ps-stat{flex:1;text-align:center;padding:12px 8px;background:rgba(107,31,42,.2)}
+.ps-stat+.ps-stat{border-left:1px solid rgba(255,255,255,.05)}
+.ps-stat-n{font-size:20px;font-weight:300;font-style:italic;color:var(--gl)}
+.ps-stat-l{font-family:'Montserrat',sans-serif;font-size:7px;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,240,232,.3);margin-top:2px}
+
+/* photo grid strip — full width at bottom of card */
+.proj-photo-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+  height:120px;
+}
+.ppg-item{
+  position:relative;overflow:hidden;
+  /* EDIT: project photo grid images */
+  background-color:rgba(255,255,255,.04);
+  background-size:cover;background-position:center;
+  cursor:none;transition:opacity .3s;
+  display:flex;align-items:center;justify-content:center;
+}
+.ppg-item:hover{opacity:.8}
+.ppg-lbl{font-family:'Montserrat',sans-serif;font-size:7px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);position:absolute;bottom:8px;left:0;right:0;text-align:center}
+.ppg-icon{opacity:.2;width:18px;height:18px}
+
+/* ── CONTACT ── */
+.contact{padding:10vh 5vw;max-width:1060px;margin:0 auto}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:8vw;align-items:start}
+.contact-l h2{font-size:clamp(36px,4.5vw,60px);font-weight:300;line-height:1.05;color:var(--b);margin-bottom:18px}
+.contact-l h2 em{font-style:italic}
+.contact-l p{font-size:17px;font-style:italic;opacity:.5;line-height:1.7;margin-bottom:18px}
+.contact-email{font-size:clamp(15px,1.6vw,20px);font-style:italic;color:var(--b);text-decoration:none;display:block;transition:opacity .3s}
+.contact-email:hover{opacity:.5}
+
+/* tracker */
+.tracker{border:1px solid rgba(196,168,130,.18);padding:26px;position:relative;margin-bottom:32px}
+.tracker::before{content:'';position:absolute;top:5px;left:5px;right:-5px;bottom:-5px;border:1px solid rgba(107,31,42,.07);pointer-events:none}
+.tracker h3{font-size:20px;font-weight:300;margin-bottom:4px}
+.tracker p{font-size:13px;font-style:italic;opacity:.38;line-height:1.5;margin-bottom:16px}
+.trow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.trow input{flex:1;min-width:130px;border:none;border-bottom:1px solid rgba(107,31,42,.16);background:transparent;padding:8px 0;font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--ch);outline:none}
+.trow input:focus{border-color:var(--b)}
+.trow input::placeholder{opacity:.28;font-style:italic}
+.btn{background:var(--b);color:var(--cr);border:none;padding:10px 22px;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.22em;text-transform:uppercase;cursor:none;transition:background .25s,transform .15s}
+.btn:hover{background:var(--bd);transform:translateY(-1px)}
+.tresult{display:none;align-items:center;gap:8px;background:var(--cr);padding:10px 14px;border:1px solid rgba(196,168,130,.22)}
+.tresult.on{display:flex}
+.turl{flex:1;font-style:italic;opacity:.5;font-size:11px;word-break:break-all}
+.cbtn{font-family:'Montserrat',sans-serif;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--s);background:none;border:1px solid var(--sl);padding:4px 10px;cursor:none;transition:all .2s;white-space:nowrap}
+.cbtn:hover{background:var(--s);color:white}
+.vlog{margin-top:10px;max-height:110px;overflow-y:auto}
+.ventry{display:flex;align-items:baseline;gap:10px;padding:6px 0;border-bottom:1px solid rgba(196,168,130,.1)}
+.vname{font-style:italic;font-size:15px;color:var(--b);min-width:90px}
+.vtime{font-family:'Montserrat',sans-serif;font-size:8px;letter-spacing:.1em;text-transform:uppercase;opacity:.35}
+.vbadge{background:var(--s);color:white;font-family:'Montserrat',sans-serif;font-size:7px;letter-spacing:.1em;padding:2px 6px;text-transform:uppercase}
+.novists{font-style:italic;opacity:.25;font-size:13px;padding:8px 0}
+.cform{display:flex;flex-direction:column;gap:14px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fg{display:flex;flex-direction:column;gap:4px}
+.fg label{font-family:'Montserrat',sans-serif;font-size:8px;letter-spacing:.24em;text-transform:uppercase;opacity:.75;color:var(--ch)}
+.fg input,.fg textarea{border:none;border-bottom:1px solid rgba(107,31,42,.25);background:transparent;padding:8px 0;font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--ch);outline:none;resize:none;width:100%}
+.fg input:focus,.fg textarea:focus{border-color:var(--b)}
+.fg input::placeholder,.fg textarea::placeholder{opacity:.55;font-style:italic;color:var(--ch)}
+.fsub{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
+.fnote{font-style:italic;font-size:12px;opacity:.6;max-width:170px;line-height:1.4;color:var(--ch)}
+.fsuccess{display:none;padding:14px 18px;background:rgba(122,140,110,.06);border:1px solid var(--sl);font-style:italic;color:var(--s);font-size:14px;margin-top:8px}
+.fsuccess.on{display:block}
+
+footer{background:var(--bd);padding:36px 5vw;display:flex;justify-content:space-between;align-items:flex-end}
+.flogo{font-size:26px;font-weight:300;font-style:italic;color:var(--cr);opacity:.4}
+.fnote-f{font-family:'Montserrat',sans-serif;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--cr);opacity:.2}
+
+/* REVEAL */
+@keyframes fup{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .85s ease,transform .85s ease}
+.rv.in{opacity:1;transform:translateY(0)}
+.rv2{opacity:0;transform:translateY(24px);transition:opacity .85s ease .14s,transform .85s ease .14s}
+.rv2.in{opacity:1;transform:translateY(0)}
+
+/* ── MOBILE ── */
+@media(max-width:860px){
+  .hero{grid-template-columns:1fr;height:auto;min-height:100svh}
+  .hero-photo{min-height:60vw}
+  .hero-float{display:none}
+  .hero-copy{padding:48px 6vw}
+  .hc-name{font-size:clamp(52px,14vw,80px)}
+  .about{grid-template-columns:1fr;gap:36px;padding:72px 6vw}
+  .work-hd{flex-direction:column;align-items:flex-start;padding:0 6vw;gap:12px}
+  .proj-list{padding:0 6vw}
+  .proj-hero{height:240px}
+  .proj-body{grid-template-columns:1fr}
+  .proj-photo-grid{grid-template-columns:repeat(3,1fr);height:90px}
+  .contact-grid{grid-template-columns:1fr}
+  .frow{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:8px}
+  nav{padding:16px 6vw}
+  .nav-links{display:none}
+  .proj-thumb-row{display:none}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="curR"></div>
+
+<nav id="nav">
+  <!-- EDIT: nav logo text -->
+  <a href="#" class="nav-logo">Khushi Dassani</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-photo">
+    <!-- EDIT: set background-image:url('your-photo.jpg') on this div -->
+    <div class="hero-photo-bg" style="background:linear-gradient(160deg,#3a2830 0%,#6B1F2A 55%,#8a3a48 100%)"></div>
+    <div class="hero-photo-overlay"></div>
+
+    <!-- floating card top-right -->
+    <div class="hero-float">
+      <div class="hf-strip">
+        <!-- EDIT: replace background-color with background-image:url() on each hf-item -->
+        <div class="hf-item"></div>
+        <div class="hf-item"></div>
+        <div class="hf-item"></div>
+      </div>
+      <!-- EDIT: floating card text -->
+      <div class="hf-label">Currently</div>
+      <div class="hf-title">(New Launch)<br>Coming Soon</div>
+      <div class="hf-sub">Kunvarani · 2026</div>
+    </div>
+
+    <div class="hero-photo-text">
+      <!-- EDIT: hero left panel text -->
+      <div class="hpt-eyebrow">Brand Strategist</div>
+      <div class="hpt-quote">I love biting off<br>more than I can chew<br><em>and figuring it out</em></div>
+      <div style="font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(245,240,232,.35);margin-top:14px">— Words to live by</div>
+    </div>
+  </div>
+
+  <div class="hero-copy">
+    <!-- EDIT: hero right panel -->
+    <div class="hc-eyebrow">Brand Strategist</div>
+    <h1 class="hc-name">Khushi<br><em>Dassani.</em></h1>
+    <div class="hc-rule"></div>
+    <!-- EDIT: replace this placeholder div with your photo by adding style="background-image:url('your-photo.jpg')" -->
+    <div style="width:100%;aspect-ratio:4/3;background:rgba(107,31,42,.08);border:1px dashed rgba(107,31,42,.2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;margin-bottom:36px;position:relative;cursor:pointer" onclick="document.getElementById('photoInput').click()">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="4" width="24" height="20" rx="2" stroke="#6B1F2A" stroke-width="1" opacity=".4"/><circle cx="14" cy="14" r="5" stroke="#6B1F2A" stroke-width="1" opacity=".4"/><circle cx="21" cy="7" r="1.5" fill="#6B1F2A" opacity=".4"/></svg>
+      <span style="font-family:'Montserrat',sans-serif;font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:rgba(107,31,42,.4)">Click to add photo</span>
+      <input type="file" id="photoInput" accept="image/*" style="display:none" onchange="setHeroPhoto(this)"/>
+    </div>
+    <div class="hc-stats">
+      <div class="hc-stat">
+        <!-- EDIT: stat 1 -->
+        <div class="hc-stat-val">5M+</div>
+        <div class="hc-stat-lbl">Campaign reach</div>
+      </div>
+      <div class="hc-stat">
+        <!-- EDIT: stat 2 -->
+        <div class="hc-stat-val">1.56×</div>
+        <div class="hc-stat-lbl">Organic growth</div>
+      </div>
+      <div class="hc-stat">
+        <!-- EDIT: stat 3 -->
+        <div class="hc-stat-val">4</div>
+        <div class="hc-stat-lbl">Brands built</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue" onclick="document.getElementById('about').scrollIntoView()">Scroll</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Brand Strategy</span><span class="dot">✦</span><span>Visual Identity</span><span class="dot">✦</span><span>Campaign Management</span><span class="dot">✦</span><span>Creative Direction</span><span class="dot">✦</span><span>Paid Media</span><span class="dot">✦</span><span>AI Tooling</span><span class="dot">✦</span><span>Photography</span><span class="dot">✦</span><span>Brand Strategy</span><span class="dot">✦</span><span>Visual Identity</span><span class="dot">✦</span><span>Campaign Management</span><span class="dot">✦</span><span>Creative Direction</span><span class="dot">✦</span><span>Paid Media</span><span class="dot">✦</span><span>AI Tooling</span><span class="dot">✦</span><span>Photography</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- ── ABOUT ── -->
+<section class="about" id="about">
+  <div class="rv">
+    <span class="sec-lbl">About</span>
+    <!-- EDIT: about heading -->
+    <h2>The<br><em>Backstage Pass</em></h2>
+  </div>
+  <div class="about-r rv2">
+    <!-- EDIT: about body text — replace paragraphs below -->
+    <p>I moved to the UK at eighteen with enough money to cover only half a year's rent. To cover the rest, I worked two jobs, and when that wasn't quite enough, I picked up a camera and started taking photography among other gigs to find exactly where my interests and skills collided. I graduated from the University of Nottingham. I also figured out very early that I can learn pretty much anything if I have to.</p>
+    <p>That turned out to be the most useful thing a degree could have taught me.</p>
+    <p>Since then I've built brand identities in the UK, India, and for a startup in San Francisco. My approach to strategy tends to involve actually building an expertise of other roles first: directing shoots, writing copy, auditing websites on Figma, and most recently (I've been showing this off to everyone!), building an AI agent to help code an e-commerce site. It wasn't really my job but rather, because the brand needed it and I was a one-person team driven to make it happen.</p>
+    <p>I'm not the strategist who hands you a deck and wishes you luck.</p>
+    <!-- EDIT: signature -->
+    <div class="about-sig">— Khushi</div>
+  </div>
+</section>
+
+<!-- ── WORK ── -->
+<section class="work" id="work">
+  <div class="work-hd rv">
+    <div>
+      <span class="wlbl">Selected Work</span>
+      <h2>Strategy<br><em>in action</em></h2>
+    </div>
+  </div>
+
+  <div class="proj-list">
+
+    <!-- ═══ PROJECT 1: KUNVARANI (newest) ═══ -->
+    <div class="proj rv">
+      <div class="proj-hero">
+        <!-- EDIT: Kunvarani hero image — replace style background with url() -->
+        <div class="proj-hero-img" style="background:linear-gradient(135deg,#1E1A28,#3D3050,#5A4870)"></div>
+        <div class="proj-hero-overlay"></div>
+        <div class="proj-topbar">
+          <div class="proj-topbar-avatar">K</div>
+          <div style="flex:1">
+            <!-- EDIT: project topbar name -->
+            <div class="proj-topbar-name">Kunvarani <em>— Ongoing</em></div>
+            <div class="proj-topbar-loc">Bangalore, India</div>
+          </div>
+          <div class="proj-topbar-badge">Current</div>
+        </div>
+        <!-- circular thumbnails -->
+        <div class="proj-thumb-row">
+          <!-- EDIT: add background-image:url() to each proj-thumb -->
+          <div class="proj-thumb"></div>
+          <div class="proj-thumb"></div>
+          <div class="proj-thumb"></div>
+          <div class="proj-thumb-add">+</div>
+        </div>
+        <div class="proj-hero-stat">
+          <div class="phs-val">Ongoing</div>
+          <div class="phs-lbl">Full-stack brand build</div>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-main">
+          <span class="proj-client">Kunvarani · Bangalore</span>
+          <!-- EDIT: project title -->
+          <div class="proj-title">The Boutique<br><em>Experience</em></div>
+          <!-- EDIT: project description -->
+          <p class="proj-desc">I am currently leading the identity for this fashion boutique in Bangalore. This is a lean operation where I wear every hat available. I personally organize and creatively direct the photoshoots, handle the editing, and manage the brand strategy. After years of avoiding code, I realized it was the only thing standing between us and a finished e-commerce site. I built a ClaudeCode AI Agent to help me code the platform myself. I am now managing our digital presence and teaching myself the nuances of paid media to ensure our growth scales as fast as our in-store activations.</p>
+          <div class="proj-tags">
+            <span class="ptag">Brand Strategy</span>
+            <span class="ptag">Creative Direction</span>
+            <span class="ptag">AI E-com</span>
+            <span class="ptag">Paid Media</span>
+            <span class="ptag">Photography</span>
+          </div>
+        </div>
+        <div class="proj-side">
+          <div class="ps-block">
+            <div class="ps-label">Role</div>
+            <div class="ps-val"><em>Brand &amp; Growth Strategist</em></div>
+          </div>
+          <div class="ps-rule"></div>
+          <div class="ps-block">
+            <div class="ps-label">Scope</div>
+            <div class="ps-val">Brand identity · Digital · In-store activations · E-commerce</div>
+          </div>
+          <div class="ps-rule"></div>
+          <div class="ps-stats">
+            <div class="ps-stat"><div class="ps-stat-n">01</div><div class="ps-stat-l">Brand</div></div>
+            <div class="ps-stat"><div class="ps-stat-n">Full</div><div class="ps-stat-l">Stack</div></div>
+            <div class="ps-stat"><div class="ps-stat-n">2025</div><div class="ps-stat-l">Ongoing</div></div>
+          </div>
+        </div>
+      </div>
+      <!-- photo grid -->
+      <div class="proj-photo-grid">
+        <!-- EDIT: replace background-color with background-image:url() -->
+        <div class="ppg-item" style="background-color:rgba(255,255,255,.04)"><svg class="ppg-icon" viewBox="0 0 18 18" fill="none"><rect x="1" y="2.5" width="16" height="13" rx="1.5" stroke="white" stroke-width=".8"/><circle cx="9" cy="9" r="3.5" stroke="white" stroke-width=".8"/></svg><span class="ppg-lbl">Shoot</span></div>
+        <div class="ppg-item" style="background-color:rgba(255,255,255,.06)"><svg class="ppg-icon" viewBox="0 0 18 18" fill="none"><rect x="1" y="2.5" width="16" height="13" rx="1.5" stroke="white" stroke-width=".8"/><circle cx="9" cy="9" r="3.5" stroke="white" stroke-width=".8"/></svg><span class="ppg-lbl">Digital</span></div>
+        <div class="ppg-item" style="background-color:rgba(255,255,255,.04)"><svg class="ppg-icon" viewBox="0 0 18 18" fill="none"><rect x="1" y="2.5" width="16" height="13" rx="1.5" stroke="white" stroke-width=".8"/><circle cx="9" cy="9" r="3.5" stroke="white" stroke-width=".8"/></svg><span class="ppg-lbl">E-com</span></div>
+      </div>
+    </div>
+
+    <!-- ═══ PROJECT 2: SCHBANG ═══ -->
+    <div class="proj rv">
+      <div class="proj-hero">
+        <div class="proj-hero-img" style="background:linear-gradient(135deg,#2A2018,#4A3C30,#6B5A48)"></div>
+        <div class="proj-hero-overlay"></div>
+        <div class="proj-topbar">
+          <div class="proj-topbar-avatar">S</div>
+          <div style="flex:1">
+            <div class="proj-topbar-name">Schbang <em>· Bangalore</em></div>
+            <div class="proj-topbar-loc">Bangalore, India</div>
+          </div>
+          <div class="proj-topbar-badge">Aug – Nov 2024</div>
+        </div>
+        <div class="proj-thumb-row">
+          <div class="proj-thumb"></div>
+          <div class="proj-thumb"></div>
+          <div class="proj-thumb"></div>
+          <div class="proj-thumb-add">+</div>
+        </div>
+        <div class="proj-hero-stat">
+          <div class="phs-val">5M+</div>
+          <div class="phs-lbl">Impressions · First campaign</div>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-main">
+          <span class="proj-client">Schbang · Bangalore</span>
+          <div class="proj-title">The<br><em>Agency Pace</em></div>
+          <p class="proj-desc">I managed the workflows for three concurrent clients and their respective teams. My first campaign for the agency pulled 5 million impressions. I turned raw performance metrics into a media plan that won an India Content Leadership Award for "Best Lifestyle Content."</p>
+          <div class="proj-tags">
+            <span class="ptag">Campaign Management</span>
+            <span class="ptag">Cross-functional</span>
+            <span class="ptag">Performance Media</span>
+            <span class="ptag">Analytics</span>
+          </div>
+        </div>
+        <div class="proj-side">
+          <div class="ps-block">
+            <div class="ps-label">Role</div>
+            <div class="ps-val"><em>Brand Strategist &amp; Project Coordinator</em></div>
+          </div>
+          <div class="ps-rule"></div>
+          <div class="ps-block">
+            <div class="ps-label">Achievement</div>
+            <div class="ps-val">India Content Leadership Award — Best Lifestyle Content</div>
+          </div>
+          <div class="ps-rule"></div>
+          <div class="ps-stats">
+            <div class="ps-stat"><div class="ps-stat-n">3</div><div class="ps-stat-l">Clients</div></div>
+            <div class="ps-stat"><div class="ps-stat-n">5M+</div><div class="ps-stat-l">Reach</div></div>
+            <div class="ps-stat"><div class="ps-stat-n">1</div><div class="ps-stat-l">Award</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="proj-photo-grid">
+        <div class="ppg-item" style="background-color:rgba(255,255,255,.04)"><svg class="ppg-icon" viewBox="0 0 18 18" fill="none"><rect x="1" y="2.5" width="16" height="13" rx="1.5" stroke="white" stroke-width=".8"/><circle cx="9" cy="9" r="3.5" stroke="white" stroke-width=".8"/></svg><span class="ppg-lbl">Campaign</span></div>
+        <div class="ppg-item" style="background-color:rgba(255,255,255,.06)"><svg class="ppg-icon" viewBox="0 0 18 18" fill="none"><rect x="1" y="2.5" width="16" height="13" rx="1.5" stroke="white" stroke-width=".8"/><circle cx="9" cy="9" r="3.5" stroke="white" stroke-width=".8"/></svg><span class="ppg-lbl">Award</span></div>
+        <div class="ppg-item" style="background-color:rgba(255,255,255,.04)"><svg class="ppg-icon" viewBox="0 0 18 18" fill="none"><rect x="1" y="2.5" width="16" height="13" rx="1.5" stroke="white" stroke-width=".8"/><circle cx="9" cy="9" r="3.5" stroke="white" stroke-width=".8"/></svg><span class="ppg-lbl">Media</span></div>
+      </div>
+    </div>
+
+    <!-- ═══ PROJECT 3: HOBBY&ME ═══ -->
+    <div class="proj rv">
+      <div class="proj-hero">
+        <div class="proj-hero-img" style="background:linear-gradient(135deg,#3A4A32,#7A8C6E,#96A88A)"></div>
+        <div class="proj-hero-overlay"></div>
+        <div class="proj-topbar">
+          <div class="proj-topbar-avatar">H</div>
+          <div style="flex:1">
+            <div class="proj-topbar-name">Hobby<em>&amp;Me</em></div>
+            <div class="proj-topbar-loc">Remote, Hyderabad</div>
+          </div>
+          <div class="proj-topbar-badge">Pre-Launch</div>
+        </div>
+        <div class="proj-thumb-row">
+          <div class="proj-thumb"></div>
+          <div class="proj-thumb"></div>
+          <div class="proj-thumb"></div>
+          <div class="proj-thumb-add">+</div>
+        </div>
+        <div class="proj-hero-stat">
+          <div class="phs-val">Full kit</div>
+          <div class="phs-lbl">End-to-end brand launch</div>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-main">
+          <span class="proj-client">Hobby&amp;Me · Pre-Launch</span>
+          <div class="proj-title">Building a personality before<br>the <em>product launched</em></div>
+          <p class="proj-desc">I built the entire DNA for this DIY hobby startup before they had a single customer — and they are still pre-launch, building towards it. I wrote the brand story, designed an AI coach persona, and mapped out every email funnel in the stack. I also audited their web content on Figma and created the product naming system. This was a complete brand launch kit, handed over and ready to go the moment they are.</p>
+          <div class="proj-tags">
+            <span class="ptag">Brand Book</span>
+            <span class="ptag">Launch Strategy</span>
+            <span class="ptag">Email Marketing</span>
+            <span class="ptag">AI Persona</span>
+          </div>
+        </div>
+        <div class="proj-side">
+          <div class="ps-block">
+            <div class="ps-label">Role</div>
+            <div class="ps-val"><em>Brand Identity &amp; Strategy</em></div>
+          </div>
+          <div class="ps-rule"></div>
+          <div class="ps-block">
+            <div class="ps-label">Deliverables</div>
+            <div class="ps-val">Brand story · AI persona · Email funnels · Naming system · Web audit</div>
+          </div>
+          <div class="ps-rule"></div>
+          <div class="ps-stats">
+            <div class="ps-stat"><div class="ps-stat-n">6+</div><div class="ps-stat-l">Deliverables</div></div>
+            <div class="ps-stat"><div class="ps-stat-n">0</div><div class="ps-stat-l">Customers</div></div>
+            <div class="ps-stat"><div class="ps-stat-n">1</div><div class="ps-stat-l">Brand built</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="proj-photo-grid">
+        <div class="ppg-item" style="background-color:rgba(255,255,255,.04)"><svg class="ppg-icon" viewBox="0 0 18 18" fill="none"><rect x="1" y="2.5" width="16" height="13" rx="1.5" stroke="white" stroke-width=".8"/><circle cx="9" cy="9" r="3.5" stroke="white" stroke-width=".8"/></svg><span class="ppg-lbl">Brand Book</span></div>
+        <div class="ppg-item" style="background-color:rgba(255,255,255,.06)"><svg class="ppg-icon" viewBox="0 0 18 18" fill="none"><rect x="1" y="2.5" width="16" height="13" rx="1.5" stroke="white" stroke-width=".8"/><circle cx="9" cy="9" r="3.5" stroke="white" stroke-width=".8"/></svg><span class="ppg-lbl">Web Audit</span></div>
+        <div class="ppg-item" style="background-color:rgba(255,255,255,.04)"><svg class="ppg-icon" viewBox="0 0 18 18" fill="none"><rect x="1" y="2.5" width="16" height="13" rx="1.5" stroke="white" stroke-width=".8"/><circle cx="9" cy="9" r="3.5" stroke="white" stroke-width=".8"/></svg><span class="ppg-lbl">Email</span></div>
+      </div>
+    </div>
+
+    <!-- ═══ PROJECT 4: AFFAIRMUSE ═══ -->
+    <div class="proj rv">
+      <div class="proj-hero">
+        <div class="proj-hero-img" style="background:linear-gradient(135deg,#3D1018,#6B1F2A,#8A3040)"></div>
+        <div class="proj-hero-overlay"></div>
+        <div class="proj-topbar">
+          <div class="proj-topbar-avatar">A</div>
+          <div style="flex:1">
+            <div class="proj-topbar-name">Affairmuse <em>— SF</em></div>
+            <div class="proj-topbar-loc">Remote, San Francisco</div>
+          </div>
+          <div class="proj-topbar-badge">2024</div>
+        </div>
+        <div class="proj-thumb-row">
+          <div class="proj-thumb"></div>
+          <div class="proj-thumb"></div>
+          <div class="proj-thumb"></div>
+          <div class="proj-thumb-add">+</div>
+        </div>
+        <div class="proj-hero-stat">
+          <div class="phs-val">1.56×</div>
+          <div class="phs-lbl">Organic growth · 8 weeks</div>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-main">
+          <span class="proj-client">Affairmuse · Remote, US</span>
+          <div class="proj-title">The Pitch That<br><em>Brought It to Life</em></div>
+          <p class="proj-desc">Affairmuse was a San Francisco startup with a clear vision and an identity that didn't reflect it yet. Working remotely from India, I partnered with the founder and developed a pitch deck that captured her brand vision end-to-end — repositioning the aesthetic toward something contemporary, authentic, and actually human. The founder ultimately decided to pivot the business due to supply chain constraints, but the strategy we built together was the foundation she needed to see where the brand could go. Organic followers grew 1.56x in eight weeks along the way, because we stopped trying to look perfect and started looking real.</p>
+          <div class="proj-tags">
+            <span class="ptag">Brand Strategy</span>
+            <span class="ptag">Visual Identity</span>
+            <span class="ptag">Organic Social</span>
+            <span class="ptag">Pitch Deck</span>
+          </div>
+        </div>
+        <div class="proj-side">
+          <div class="ps-block">
+            <div class="ps-label">Role</div>
+            <div class="ps-val"><em>Brand Strategist</em></div>
+          </div>
+          <div class="ps-rule"></div>
+          <div class="ps-block">
+            <div class="ps-label">Scope</div>
+            <div class="ps-val">Visual identity · Positioning · Pitch deck · Social content strategy</div>
+          </div>
+          <div class="ps-rule"></div>
+          <div class="ps-stats">
+            <div class="ps-stat"><div class="ps-stat-n">1.56×</div><div class="ps-stat-l">Growth</div></div>
+            <div class="ps-stat"><div class="ps-stat-n">8w</div><div class="ps-stat-l">Timeline</div></div>
+            <div class="ps-stat"><div class="ps-stat-n">$0</div><div class="ps-stat-l">Paid spend</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="proj-photo-grid">
+        <div class="ppg-item" style="background-color:rgba(255,255,255,.04)"><svg class="ppg-icon" viewBox="0 0 18 18" fill="none"><rect x="1" y="2.5" width="16" height="13" rx="1.5" stroke="white" stroke-width=".8"/><circle cx="9" cy="9" r="3.5" stroke="white" stroke-width=".8"/></svg><span class="ppg-lbl">Before</span></div>
+        <div class="ppg-item" style="background-color:rgba(255,255,255,.06)"><svg class="ppg-icon" viewBox="0 0 18 18" fill="none"><rect x="1" y="2.5" width="16" height="13" rx="1.5" stroke="white" stroke-width=".8"/><circle cx="9" cy="9" r="3.5" stroke="white" stroke-width=".8"/></svg><span class="ppg-lbl">Identity</span></div>
+        <div class="ppg-item" style="background-color:rgba(255,255,255,.04)"><svg class="ppg-icon" viewBox="0 0 18 18" fill="none"><rect x="1" y="2.5" width="16" height="13" rx="1.5" stroke="white" stroke-width=".8"/><circle cx="9" cy="9" r="3.5" stroke="white" stroke-width=".8"/></svg><span class="ppg-lbl">Pitch Deck</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="contact" id="contact">
+  <div class="contact-grid">
+    <div class="rv">
+      <span class="sec-lbl">Get In Touch</span>
+      <!-- EDIT: contact heading -->
+      <h2>Let's make<br><em>magic</em><br>together.</h2>
+      <!-- EDIT: contact paragraph -->
+      <p>If you're working on something in fashion, lifestyle, or consumer brands and need someone who can run strategy and execution in the same breath, my inbox is open.</p>
+      <!-- EDIT: your email -->
+      <a href="/cdn-cgi/l/email-protection#640f0c11170c0d00051717050a0d51240309050d084a070b09" class="contact-email"><span class="__cf_email__" data-cfemail="f3989b86809b9a97928080929d9ac6b3949e929a9fdd909c9e">[email&#160;protected]</span></a>
+    </div>
+    <div class="rv2">
+      <div class="tracker">
+        <span class="sec-lbl">Visitor Tracking</span>
+        <h3>Generate a tracked link</h3>
+        <p>Know exactly who viewed your portfolio and when.</p>
+        <div class="trow">
+          <input id="tName" type="text" placeholder="e.g. Sarah at Vogue"/>
+          <button class="btn" onclick="genLink()">Generate</button>
+        </div>
+        <div class="tresult" id="tResult"><span class="turl" id="tUrl"></span><button class="cbtn" onclick="copyLnk()">Copy</button></div>
+        <div class="vlog" id="vLog"><p class="novists">No visits yet.</p></div>
+      </div>
+      <form class="cform" onsubmit="subForm(event)">
+        <div class="frow">
+          <div class="fg"><label>Name</label><input type="text" placeholder="Your name" required/></div>
+          <div class="fg"><label>Email</label><input type="email" placeholder="your@email.com" required/></div>
+        </div>
+        <div class="fg"><label>Message</label><textarea rows="4" placeholder="Tell me about your project..."></textarea></div>
+        <div class="fsub"><p class="fnote">Each message is read personally.</p><button type="submit" class="btn">Send</button></div>
+      </form>
+      <div class="fsuccess" id="fOk">Your message arrived safely — I'll be in touch. ✦</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="flogo">Khushi Dassani</div>
+  <div class="fnote-f"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5a31322f2932333e3b29293b34336f1a3d373b333674393537">[email&#160;protected]</a> · © 2026</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+function setHeroPhoto(input){
+  if(!input.files||!input.files[0])return;
+  var url=URL.createObjectURL(input.files[0]);
+  var ph=input.parentElement;
+  ph.style.backgroundImage='url('+url+')';
+  ph.style.backgroundSize='cover';
+  ph.style.backgroundPosition='center';
+  ph.style.border='none';
+  ph.innerHTML='';
+  ph.onclick=null;
+}
+function subForm(e){e.preventDefault();e.target.style.display='none';document.getElementById('fOk').classList.add('on');}
+</script><script>
+const cur=document.getElementById('cur'),rng=document.getElementById('curR');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function t(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.1;ry+=(my-ry)*.1;rng.style.left=rx+'px';rng.style.top=ry+'px';requestAnimationFrame(t)})();
+document.querySelectorAll('a,button,.btn,.cbtn,.proj,.scroll-cue').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{rng.style.transform='translate(-50%,-50%) scale(2.2)';rng.style.opacity='.7'});
+  el.addEventListener('mouseleave',()=>{rng.style.transform='translate(-50%,-50%) scale(1)';rng.style.opacity='.4'});
+});
+
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('sc',scrollY>60)});
+
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.07});
+document.querySelectorAll('.rv,.rv2').forEach(el=>obs.observe(el));
+
+const visits=JSON.parse(localStorage.getItem('kd_v')||'[]');
+function genLink(){
+  const n=document.getElementById('tName').value.trim();if(!n)return;
+  const slug=n.toLowerCase().replace(/[^a-z0-9]/g,'-').replace(/-+/g,'-');
+  const url=location.href.split('?')[0].split('#')[0]+'?ref='+slug+'&vn='+encodeURIComponent(n);
+  document.getElementById('tUrl').textContent=url;
+  document.getElementById('tResult').classList.add('on');
+  document.getElementById('tName').value='';
+}
+function copyLnk(){
+  navigator.clipboard.writeText(document.getElementById('tUrl').textContent).then(()=>{
+    const b=document.querySelector('.cbtn');b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy',2000);
+  });
+}
+(function chkVisit(){
+  const p=new URLSearchParams(location.search),n=p.get('vn');
+  if(n){visits.unshift({name:n,time:new Date().toISOString()});if(visits.length>20)visits.pop();localStorage.setItem('kd_v',JSON.stringify(visits));}
+  const lg=document.getElementById('vLog');if(!visits.length)return;
+  lg.innerHTML=visits.map(v=>{
+    const d=new Date(v.time),ts=d.toLocaleDateString('en-GB',{day:'numeric',month:'short'})+' �
