@@ -4,8 +4,8 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import Lightbox from "./Lightbox";
 
 /* ── Types ── */
-interface HeroSlot { src: string | null }
-interface GridSlot { src: string | null; href: string; label: string }
+interface HeroSlot { src: string | null; pos: string }
+interface GridSlot { src: string | null; href: string; label: string; pos: string }
 interface ProjectImages {
   hero: HeroSlot[];
   grid: GridSlot[];
@@ -13,10 +13,14 @@ interface ProjectImages {
 }
 
 /* ── Per-project image hook ── */
-function useProjectImages(gridLabels: string[]) {
+function useProjectImages(gridLabels: string[], initialHero: string[] = [], initialGrid: string[] = []) {
   const [images, setImages] = useState<ProjectImages>({
-    hero: [{ src: null }, { src: null }, { src: null }],
-    grid: gridLabels.map(l => ({ src: null, href: "", label: l })),
+    hero: [
+      { src: initialHero[0] ?? null, pos: "center" },
+      { src: initialHero[1] ?? null, pos: "center" },
+      { src: initialHero[2] ?? null, pos: "center" },
+    ],
+    grid: gridLabels.map((l, i) => ({ src: initialGrid[i] ?? null, href: "", label: l, pos: "center" })),
     active: 0,
   });
   const pausedRef = useRef(false);
@@ -53,11 +57,27 @@ function useProjectImages(gridLabels: string[]) {
     readFile(file).then(src => {
       setImages(prev => {
         const hero = [...prev.hero];
-        hero[idx] = { src };
+        hero[idx] = { ...hero[idx], src };
         return { ...prev, hero, active: idx };
       });
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const setHeroPos = useCallback((idx: number, pos: string) => {
+    setImages(prev => {
+      const hero = [...prev.hero];
+      hero[idx] = { ...hero[idx], pos };
+      return { ...prev, hero };
+    });
+  }, []);
+
+  const setGridPos = useCallback((idx: number, pos: string) => {
+    setImages(prev => {
+      const grid = [...prev.grid];
+      grid[idx] = { ...grid[idx], pos };
+      return { ...prev, grid };
+    });
+  }, []);
 
   const clickCircle = useCallback((idx: number) => {
     setImages(prev => {
@@ -86,7 +106,19 @@ function useProjectImages(gridLabels: string[]) {
     });
   }, []);
 
-  return { images, uploadHero, clickCircle, uploadGrid, setGridHref };
+  return { images, uploadHero, clickCircle, uploadGrid, setGridHref, setHeroPos, setGridPos };
+}
+
+/* ── Position control (3×3 crop grid) ── */
+const POS_GRID = ["top left","top center","top right","center left","center","center right","bottom left","bottom center","bottom right"];
+function PosControl({ current, onChange }: { current: string; onChange: (p: string) => void }) {
+  return (
+    <div className="pos-ctrl" onClick={e => e.stopPropagation()}>
+      {POS_GRID.map(p => (
+        <button key={p} className={`pos-btn${current === p ? " pos-btn--on" : ""}`} onClick={() => onChange(p)} title={p} />
+      ))}
+    </div>
+  );
 }
 
 /* ── Camera icon ── */
@@ -98,11 +130,12 @@ const CamSvg = () => (
 );
 
 /* ── Grid item with upload + link ── */
-function GridItem({ slot, idx, projId, onSetHref, onLightbox }: {
+function GridItem({ slot, idx, projId, onSetHref, onSetPos, onLightbox }: {
   slot: GridSlot;
   idx: number;
   projId: string;
   onSetHref: (h: string) => void;
+  onSetPos: (p: string) => void;
   onLightbox: () => void;
 }) {
   const [showLink, setShowLink] = useState(false);
@@ -119,14 +152,16 @@ function GridItem({ slot, idx, projId, onSetHref, onLightbox }: {
       className={`ppg-item${slot.href ? " has-link" : ""}`}
       onClick={slot.src ? onLightbox : undefined}
     >
-      {slot.src && <img src={slot.src} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />}
-      {/* Empty state: label points to external hoisted input */}
+      {slot.src && <img src={slot.src} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: slot.pos }} />}
+      {slot.src && <PosControl current={slot.pos} onChange={onSetPos} />}
+      {/* Empty state: camera icon */}
       {!slot.src && (
         <label htmlFor={`pg-${projId}-${idx}`} style={{ display: "contents", cursor: "pointer" }}>
           <CamSvg />
-          <span className="ppg-lbl">{slot.label}</span>
         </label>
       )}
+      {/* Label always visible at bottom */}
+      <span className={`ppg-lbl${slot.src ? " ppg-lbl--filled" : ""}`}>{slot.label}</span>
 
       {/* Image loaded: show link button */}
       {slot.src && (
@@ -158,26 +193,35 @@ function GridItem({ slot, idx, projId, onSetHref, onLightbox }: {
 }
 
 /* ── Project hero gallery ── */
-function HeroGallery({ pid, images, onCircle, onLightbox }: {
+function HeroGallery({ pid, images, onCircle, onPosChange, onLightbox }: {
   pid: string;
   images: ProjectImages;
   onCircle: (idx: number) => void;
+  onPosChange: (idx: number, pos: string) => void;
   onLightbox: (src: string) => void;
 }) {
-  const activeSrc = images.hero[images.active].src;
+  const activeSlot = images.hero[images.active];
+  const activeSrc = activeSlot.src;
 
   return (
     <>
-      {/* Loaded images — cross-fade via opacity; use <img> not background-image (iOS data URL size limit) */}
+      {/* Loaded images — cross-fade via opacity */}
       {images.hero.map((slot, i) => (
         slot.src && (
           <div key={i} className="proj-hero-img-slot" style={{ opacity: i === images.active ? 1 : 0 }}>
-            <img src={slot.src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+            <img src={slot.src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: slot.pos, display: "block" }} />
           </div>
         )
       ))}
 
-      {/* Empty state: label points to external input (outside overflow:hidden) */}
+      {/* Position control for active slot */}
+      {activeSrc && (
+        <div style={{ position: "absolute", top: 56, left: 12, zIndex: 4 }}>
+          <PosControl current={activeSlot.pos} onChange={p => onPosChange(images.active, p)} />
+        </div>
+      )}
+
+      {/* Empty state */}
       {!activeSrc && (
         <label htmlFor={`hu-${pid}-0`} className="gallery-upload-hint" style={{ cursor: "pointer" }}>
           <CamSvg />
@@ -202,13 +246,29 @@ interface Visit { name: string; time: string }
 /* ── Main Portfolio component ── */
 export default function Portfolio() {
   /* Photo upload for hero right panel */
-  const [heroPhoto, setHeroPhoto] = useState<string | null>(null);
+  const [heroPhoto, setHeroPhoto] = useState<string | null>("/images/Profile Photo.JPG");
 
   /* Per-project image galleries */
-  const p0 = useProjectImages(["Shoot", "Digital", "E-com"]);
-  const p1 = useProjectImages(["Campaign", "Award", "Media"]);
-  const p2 = useProjectImages(["Brand Book", "Web Audit", "Email"]);
-  const p3 = useProjectImages(["Before", "Identity", "Pitch Deck"]);
+  const p0 = useProjectImages(
+    ["Shoot", "Instagram", "E-com"],
+    ["/images/Kunvarani_1.jpg", "/images/Kunvarani_2.jpeg", "/images/Kunvarani_3.jpg"],
+    ["/images/Kunvarani_4.jpeg", "/images/Kunvarani_5.JPG", "/images/Kunvarani_6.JPG"],
+  );
+  const p1 = useProjectImages(
+    ["Campaign", "Award", "Media"],
+    ["/images/Schbang_1.jpg", "/images/Schbang_2.jpg", "/images/Schbang_3.jpg"],
+    ["/images/Schbang_4.jpg", "/images/Schbang Award Photo.jpg", "/images/Schbang_6.jpg"],
+  );
+  const p2 = useProjectImages(
+    ["Brand Book", "Web Audit", "Email"],
+    ["/images/Hobby&Me_1.JPG", "/images/Hobby&Me_2.png", "/images/Hobby&Me_3.PNG"],
+    ["/images/Hobby&Me_4.PNG", "/images/Hobby&Me_5.PNG", "/images/Hobby&Me_6.png"],
+  );
+  const p3 = useProjectImages(
+    ["Pitch Deck", "Social", "Identity"],
+    ["/images/Affairmuse_1.jpg", "/images/Affairmuse_2.JPG", "/images/Affairmuse_3.jpg"],
+    ["/images/Affairmuse_4.JPG", "/images/Affairmuse_5.jpg", "/images/Affairmuse_6.jpg"],
+  );
   const projects = [p0, p1, p2, p3];
 
   /* Lightbox */
@@ -319,6 +379,7 @@ export default function Portfolio() {
   const projectDefs = [
     {
       id: "kunvarani",
+      accent: "burgundy",
       gradient: "linear-gradient(135deg,#1E1A28,#3D3050,#5A4870)",
       avatar: "K",
       badge: "Current",
@@ -336,6 +397,7 @@ export default function Portfolio() {
     },
     {
       id: "schbang",
+      accent: "sage",
       gradient: "linear-gradient(135deg,#2A2018,#4A3C30,#6B5A48)",
       avatar: "S",
       badge: "Aug – Nov 2024",
@@ -353,6 +415,7 @@ export default function Portfolio() {
     },
     {
       id: "hobbyme",
+      accent: "sage",
       gradient: "linear-gradient(135deg,#3A4A32,#7A8C6E,#96A88A)",
       avatar: "H",
       badge: "Pre-Launch",
@@ -370,6 +433,7 @@ export default function Portfolio() {
     },
     {
       id: "affairmuse",
+      accent: "burgundy",
       gradient: "linear-gradient(135deg,#3D1018,#6B1F2A,#8A3040)",
       avatar: "A",
       badge: "2024",
@@ -428,6 +492,7 @@ export default function Portfolio() {
         <ul className="nav-links">
           <li><a href="#about">About</a></li>
           <li><a href="#work">Work</a></li>
+          <li><a href="#decks">Decks</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -439,15 +504,15 @@ export default function Portfolio() {
           <div className="hero-photo-overlay" />
           <div className="hero-float">
             <div className="hf-strip">
-              <div className="hf-item" /><div className="hf-item" /><div className="hf-item" />
+              <div className="hf-item" style={{ backgroundImage: "url('/images/Cover page polaroid_1.JPG')" }} />
+              <div className="hf-item" style={{ backgroundImage: "url('/images/Cover page polaroid_2.JPG')" }} />
+              <div className="hf-item" style={{ backgroundImage: "url('/images/Cover page polaroid_3.JPG')" }} />
             </div>
-            <div className="hf-label">Currently</div>
-            <div className="hf-title">(New Launch)<br />Coming Soon</div>
-            <div className="hf-sub">Kunvarani · 2026</div>
+            <div className="hf-title">Fashion and Lifestyle Marketer</div>
           </div>
           <div className="hero-photo-text">
             <div className="hpt-eyebrow">Brand Strategist</div>
-            <div className="hpt-quote">I love biting off<br />more than I can chew<br /><em>and figuring it out</em></div>
+            <div className="hpt-quote">I love biting off more than I can chew…<br /><em>and then figuring it out</em></div>
             <div style={{ fontFamily: "var(--font-montserrat)", fontSize: "9px", letterSpacing: ".3em", textTransform: "uppercase", color: "rgba(245,240,232,.35)", marginTop: "14px" }}>— Words to live by</div>
           </div>
         </div>
@@ -481,7 +546,6 @@ export default function Portfolio() {
             <div className="hc-stat"><div className="hc-stat-val">4</div><div className="hc-stat-lbl">Brands built</div></div>
           </div>
         </div>
-        <div className="scroll-cue" onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}>Scroll</div>
       </section>
 
       {/* ── Marquee ── */}
@@ -523,7 +587,7 @@ export default function Portfolio() {
             const pg = projects[pi];
             const loadedHeroSrcs = pg.images.hero.filter(h => h.src).map(h => h.src as string);
             return (
-              <div className="proj rv" key={def.id}>
+              <div className={`proj rv proj--${def.accent}`} key={def.id}>
                 <div className="proj-hero">
                   {/* Gradient fallback */}
                   <div className="proj-hero-img" style={{ background: def.gradient }} />
@@ -534,6 +598,7 @@ export default function Portfolio() {
                     pid={def.id}
                     images={pg.images}
                     onCircle={pg.clickCircle}
+                    onPosChange={pg.setHeroPos}
                     onLightbox={src => {
                       const idx = loadedHeroSrcs.indexOf(src);
                       openLightbox(loadedHeroSrcs, idx >= 0 ? idx : 0);
@@ -556,7 +621,7 @@ export default function Portfolio() {
                         <div
                           key={i}
                           className={`proj-thumb${i === pg.images.active ? " active" : ""}`}
-                          style={{ backgroundImage: `url(${slot.src})` }}
+                          style={{ backgroundImage: `url('${slot.src}')` }}
                           onClick={e => { e.stopPropagation(); pg.clickCircle(i); }}
                         />
                       ) : (
@@ -587,7 +652,7 @@ export default function Portfolio() {
                         <div
                           key={i}
                           className={`proj-thumb${i === pg.images.active ? " active" : ""}`}
-                          style={{ backgroundImage: `url(${slot.src})` }}
+                          style={{ backgroundImage: `url('${slot.src}')` }}
                           onClick={() => pg.clickCircle(i)}
                         />
                       ) : (
@@ -641,6 +706,7 @@ export default function Portfolio() {
                       idx={gi}
                       projId={def.id}
                       onSetHref={h => pg.setGridHref(gi, h)}
+                      onSetPos={p => pg.setGridPos(gi, p)}
                       onLightbox={() => slot.src && openLightbox([slot.src], 0)}
                     />
                   ))}
@@ -648,6 +714,34 @@ export default function Portfolio() {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* ── Pitch Decks ── */}
+      <section className="decks" id="decks">
+        <div className="decks-hd rv">
+          <span className="wlbl">Selected Work</span>
+          <h2>Pitch Decks<br /><em>I&apos;ve built</em></h2>
+        </div>
+        <div className="decks-grid rv2">
+          {[
+            { title: "Brand Strategy", brand: "Affairmuse", href: "/images/Affairmuse x KD  Brand Strategy.pdf.pdf", cover: "/images/Affairmuse Deck_Cover.png" },
+            { title: "Final Presentation", brand: "Henkel", href: "/images/Henkel_Presentation_Final.pptx", cover: "/images/Henkel Deck Cover .png" },
+            { title: "Pitch Deck", brand: "Lafolie", href: "/images/Lafolie.pdf", cover: "/images/Lafolie Deck Cover.png" },
+          ].map((deck, i) => (
+            <a key={i} href={deck.href || undefined} target="_blank" rel="noopener noreferrer" className={`deck-card${deck.href ? "" : " deck-card--no-link"}`}>
+              <div className="deck-cover">
+                {deck.cover
+                  ? <img src={deck.cover} alt={deck.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  : <span className="deck-placeholder">Cover</span>}
+              </div>
+              <div className="deck-info">
+                <div className="deck-brand">{deck.brand}</div>
+                <div className="deck-title">{deck.title}</div>
+                {deck.href && <div className="deck-cta">View deck →</div>}
+              </div>
+            </a>
+          ))}
         </div>
       </section>
 
