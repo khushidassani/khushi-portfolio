@@ -336,9 +336,15 @@ export default function Portfolio() {
     const params = new URLSearchParams(window.location.search);
     const vn = params.get("vn");
     if (vn) {
-      stored.unshift({ name: vn, time: new Date().toISOString() });
+      const visitTime = new Date().toISOString();
+      stored.unshift({ name: vn, time: visitTime });
       if (stored.length > 20) stored.pop();
       localStorage.setItem("kd_v", JSON.stringify(stored));
+      fetch("/api/track", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: vn, time: visitTime }),
+      }).catch(() => {});
     }
     setVisits(stored);
     setIsAdmin(new URLSearchParams(window.location.search).get("admin") === "1");
