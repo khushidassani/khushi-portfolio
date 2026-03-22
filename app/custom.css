@@ -53,7 +53,7 @@ nav.sc{background:rgba(250,247,242,.94);backdrop-filter:blur(14px);border-bottom
 .hc-name em{font-style:italic}
 .hc-rule{width:36px;height:1px;background:var(--g);margin-bottom:18px}
 .hc-tagline{font-size:20px;font-style:italic;color:var(--ch);opacity:.5;margin-bottom:44px;line-height:1.5}
-.hc-stats{display:flex;gap:0;border-top:1px solid rgba(107,31,42,.1)}
+.hc-stats{display:flex;gap:0;border-top:1px solid rgba(107,31,42,.1);margin-top:8px}
 .hc-stat{flex:1;padding:20px 0 0}
 .hc-stat+.hc-stat{border-left:1px solid rgba(107,31,42,.08);padding-left:20px}
 .hc-stat-val{font-size:30px;font-weight:300;font-style:italic;color:var(--b);line-height:1}
@@ -88,13 +88,13 @@ nav.sc{background:rgba(250,247,242,.94);backdrop-filter:blur(14px);border-bottom
 .wlbl{font-family:var(--font-montserrat),'Montserrat',sans-serif;font-size:11px;letter-spacing:.38em;text-transform:uppercase;color:var(--s);display:block;margin-bottom:12px}
 
 /* ── PROJECT CARDS ── */
-.proj-list{max-width:1300px;margin:0 auto;padding:0 5vw;display:flex;flex-direction:column;gap:24px}
+.proj-list{max-width:1300px;margin:0 auto;padding:0 5vw;display:flex;flex-direction:column;gap:80px}
 .proj{border:1px solid rgba(44,37,32,.1);overflow:hidden;background:transparent}
 .proj-hero{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden}
 .proj-hero-img{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .8s ease}
 .proj:hover .proj-hero-img{transform:scale(1.03)}
 .proj-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(30,12,18,.2) 0%,rgba(30,12,18,.65) 100%)}
-.proj-topbar{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;gap:12px;padding:16px 24px;background:rgba(107,31,42,.6);backdrop-filter:blur(8px);z-index:3}
+.proj-topbar{position:relative;display:flex;align-items:center;gap:12px;padding:16px 24px;background:rgba(107,31,42,.6);backdrop-filter:blur(8px);z-index:3}
 .proj-topbar-avatar{width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(196,168,130,.5);background:rgba(196,168,130,.15);display:flex;align-items:center;justify-content:center;font-size:15px;font-style:italic;color:var(--gl);flex-shrink:0}
 .proj-topbar-name{font-size:17px;font-weight:300;color:var(--cr);flex:1}
 .proj-topbar-name em{font-style:italic;color:var(--gl)}
@@ -246,7 +246,7 @@ footer{background:var(--bd);padding:36px 5vw;display:flex;justify-content:space-
 .ppg-item.has-link::after{content:'↗';position:absolute;top:6px;right:8px;font-size:11px;color:rgba(245,240,232,.5);font-family:serif}
 .ppg-link-input{position:absolute;bottom:28px;left:4px;right:4px;z-index:10;background:rgba(20,12,10,.9);border:1px solid rgba(196,168,130,.3);padding:4px 8px;font-family:var(--font-montserrat),'Montserrat',sans-serif;font-size:8px;letter-spacing:.1em;color:rgba(245,240,232,.7);outline:none;display:none}
 .ppg-link-input.show{display:block}
-.ppg-item:hover .ppg-link-btn{opacity:1}
+.ppg-item:hover .ppg-link-btn,.ppg-item.has-link .ppg-link-btn{opacity:1}
 .ppg-link-btn{position:absolute;top:6px;right:6px;opacity:0;background:rgba(20,12,10,.7);border:1px solid rgba(196,168,130,.3);color:rgba(245,240,232,.6);font-size:9px;padding:2px 6px;cursor:none;transition:opacity .2s;font-family:var(--font-montserrat),'Montserrat',sans-serif;letter-spacing:.1em;text-transform:uppercase;z-index:5}
 
 /* ── MOBILE CONTROLS STRIP (circles + stat below hero) — must be before media query ── */

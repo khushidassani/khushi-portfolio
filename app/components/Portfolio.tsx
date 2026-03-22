@@ -250,17 +250,17 @@ export default function Portfolio() {
 
   /* Per-project image galleries */
   const p0 = useProjectImages(
-    ["Shoot", "Instagram", "E-com"],
+    ["Results", "Instagram", "E-com"],
     ["/images/Kunvarani_1.jpg", "/images/Kunvarani_2.jpeg", "/images/Kunvarani_3.jpg"],
     ["/images/Kunvarani_4.jpeg", "/images/Kunvarani_5.JPG", "/images/Kunvarani_6.JPG"],
   );
   const p1 = useProjectImages(
-    ["Campaign", "Award", "Media"],
+    ["Sample Campaign Brief", "Awards", "Instagram"],
     ["/images/Schbang_1.jpg", "/images/Schbang_2.jpg", "/images/Schbang_3.jpg"],
     ["/images/Schbang_4.jpg", "/images/Schbang Award Photo.jpg", "/images/Schbang_6.jpg"],
   );
   const p2 = useProjectImages(
-    ["Brand Book", "Web Audit", "Email"],
+    ["Brand Book", "Web Audit", "Testimonial"],
     ["/images/Hobby&Me_1.JPG", "/images/Hobby&Me_2.png", "/images/Hobby&Me_3.PNG"],
     ["/images/Hobby&Me_4.PNG", "/images/Hobby&Me_5.PNG", "/images/Hobby&Me_6.png"],
   );
@@ -277,6 +277,7 @@ export default function Portfolio() {
   const closeLightbox = () => setLightbox(null);
 
   /* Tracker + form */
+  const [isAdmin, setIsAdmin] = useState(false);
   const [visits, setVisits] = useState<Visit[]>([]);
   const [trackerUrl, setTrackerUrl] = useState("");
   const [trackerVisible, setTrackerVisible] = useState(false);
@@ -331,6 +332,7 @@ export default function Portfolio() {
       localStorage.setItem("kd_v", JSON.stringify(stored));
     }
     setVisits(stored);
+    setIsAdmin(new URLSearchParams(window.location.search).get("admin") === "1");
 
     return () => {
       document.removeEventListener("mousemove", onMove);
@@ -388,19 +390,19 @@ export default function Portfolio() {
       statVal: "Ongoing", statLbl: "Full-stack brand build",
       client: "Kunvarani · Bangalore",
       titleEl: <>The Boutique<br /><em>Experience</em></>,
-      desc: "I am currently leading the identity for this fashion boutique in Bangalore. This is a lean operation where I wear every hat available. I personally organize and creatively direct the photoshoots, handle the editing, and manage the brand strategy. After years of avoiding code, I realized it was the only thing standing between us and a finished e-commerce site. I built a ClaudeCode AI Agent to help me code the platform myself. I am now managing our digital presence and teaching myself the nuances of paid media to ensure our growth scales as fast as our in-store activations.",
+      desc: "I'm currently leading the identity for this fashion boutique in Bangalore. It's a lean operation where I wear every hat available — personally organising and creatively directing the photoshoots, AI editing visuals and videos, and most importantly, managing the brand growth strategy. After years of avoiding code, I realised it was the only thing standing between us and a finished e-commerce website. So I built a Claude Code AI agent to help me code the platform myself. I'm now managing our digital presence and teaching myself the nuances of paid media to ensure our growth scales as fast as our in-store activations.",
       tags: ["Brand Strategy", "Creative Direction", "AI E-com", "Paid Media", "Photography"],
       roleEl: <em>Brand &amp; Growth Strategist</em>,
       sideLabel2: "Scope",
       sideVal2: "Brand identity · Digital · In-store activations · E-commerce",
-      stats: [{ n: "01", l: "Brand" }, { n: "Full", l: "Stack" }, { n: "2025", l: "Ongoing" }],
+      stats: [{ n: "9.2%", l: "Organic follower growth" }, { n: "653%", l: "Organic growth in reach" }, { n: "293.8%", l: "Organic growth in profile activity" }],
     },
     {
       id: "schbang",
       accent: "sage",
       gradient: "linear-gradient(135deg,#2A2018,#4A3C30,#6B5A48)",
       avatar: "S",
-      badge: "Aug – Nov 2024",
+      badge: "Nov 2024–2025",
       badgeLoc: "Bangalore, India",
       nameEl: <><span>Schbang</span> <em>· Bangalore</em></>,
       statVal: "5M+", statLbl: "Impressions · First campaign",
@@ -411,7 +413,7 @@ export default function Portfolio() {
       roleEl: <em>Brand Strategist &amp; Project Coordinator</em>,
       sideLabel2: "Achievement",
       sideVal2: "India Content Leadership Award — Best Lifestyle Content",
-      stats: [{ n: "3", l: "Clients" }, { n: "5M+", l: "Reach" }, { n: "1", l: "Award" }],
+      stats: [{ n: "2", l: "Clients" }, { n: "5M+", l: "Reach" }, { n: "3", l: "Awards" }],
     },
     {
       id: "hobbyme",
@@ -424,25 +426,25 @@ export default function Portfolio() {
       statVal: "Full kit", statLbl: "End-to-end brand launch",
       client: "Hobby&Me · Pre-Launch",
       titleEl: <>Building a personality before<br />the <em>product launched</em></>,
-      desc: "I built the entire DNA for this DIY hobby startup before they had a single customer — and they are still pre-launch, building towards it. I wrote the brand story, designed an AI coach persona, and mapped out every email funnel in the stack. I also audited their web content on Figma and created the product naming system. This was a complete brand launch kit, handed over and ready to go the moment they are.",
+      desc: "I built the entire DNA for this DIY hobby start-up while they're pre-launch building towards it. I wrote the brand story, designed an AI persona and mapped out every email funnel in the stack. I also audited the web content on Figma and created a product naming system. This was a complete brand launch kit, handed over and ready to go the moment they are. The 4 week project turned into a 3 month collaboration as my role was extended to kickstart post concepts for their launch on socials.",
       tags: ["Brand Book", "Launch Strategy", "Email Marketing", "AI Persona"],
       roleEl: <em>Brand Identity &amp; Strategy</em>,
       sideLabel2: "Deliverables",
       sideVal2: "Brand story · AI persona · Email funnels · Naming system · Web audit",
-      stats: [{ n: "6+", l: "Deliverables" }, { n: "0", l: "Customers" }, { n: "1", l: "Brand built" }],
+      stats: [{ n: "9+", l: "Deliverables" }, { n: "2", l: "Project extensions" }, { n: "1", l: "Brand built" }],
     },
     {
       id: "affairmuse",
       accent: "burgundy",
       gradient: "linear-gradient(135deg,#3D1018,#6B1F2A,#8A3040)",
       avatar: "A",
-      badge: "2024",
+      badge: "2025",
       badgeLoc: "Remote, San Francisco",
       nameEl: <><span>Affairmuse</span> <em>— SF</em></>,
       statVal: "1.56×", statLbl: "Organic growth · 8 weeks",
       client: "Affairmuse · Remote, US",
       titleEl: <>The Pitch That<br /><em>Brought It to Life</em></>,
-      desc: "Affairmuse was a San Francisco startup with a clear vision and an identity that didn't reflect it yet. Working remotely from India, I partnered with the founder and developed a pitch deck that captured her brand vision end-to-end — repositioning the aesthetic toward something contemporary, authentic, and actually human. The founder ultimately decided to pivot the business due to supply chain constraints, but the strategy we built together was the foundation she needed to see where the brand could go. Organic followers grew 1.56x in eight weeks along the way, because we stopped trying to look perfect and started looking real.",
+      desc: "Affairmuse was a San Francisco based startup with a clear vision and an identity that didn't reflect it yet. Working remotely from India, I partnered with the founder and developed a pitch deck that captured her brand vision end-to-end, repositioning the aesthetic toward something contemporary, authentic and with human connection. The founder ultimately decided to pivot her business due to supply chain constraints, but the strategy we built together was the foundation she needed to see where the brand could go. I grew her followers organically by 1.56x in eight weeks along the way.",
       tags: ["Brand Strategy", "Visual Identity", "Organic Social", "Pitch Deck"],
       roleEl: <em>Brand Strategist</em>,
       sideLabel2: "Scope",
@@ -541,9 +543,9 @@ export default function Portfolio() {
             </div>
           )}
           <div className="hc-stats">
+            <div className="hc-stat"><div className="hc-stat-val">5</div><div className="hc-stat-lbl">Brands built</div></div>
+            <div className="hc-stat"><div className="hc-stat-val">9.2%</div><div className="hc-stat-lbl">Organic follower growth</div></div>
             <div className="hc-stat"><div className="hc-stat-val">5M+</div><div className="hc-stat-lbl">Campaign reach</div></div>
-            <div className="hc-stat"><div className="hc-stat-val">1.56×</div><div className="hc-stat-lbl">Organic growth</div></div>
-            <div className="hc-stat"><div className="hc-stat-val">4</div><div className="hc-stat-lbl">Brands built</div></div>
           </div>
         </div>
       </section>
@@ -588,6 +590,14 @@ export default function Portfolio() {
             const loadedHeroSrcs = pg.images.hero.filter(h => h.src).map(h => h.src as string);
             return (
               <div className={`proj rv proj--${def.accent}`} key={def.id}>
+                <div className="proj-topbar">
+                  <div className="proj-topbar-avatar">{def.avatar}</div>
+                  <div style={{ flex: 1 }}>
+                    <div className="proj-topbar-name">{def.nameEl}</div>
+                    <div className="proj-topbar-loc">{def.badgeLoc}</div>
+                  </div>
+                  <div className="proj-topbar-badge">{def.badge}</div>
+                </div>
                 <div className="proj-hero">
                   {/* Gradient fallback */}
                   <div className="proj-hero-img" style={{ background: def.gradient }} />
@@ -604,15 +614,6 @@ export default function Portfolio() {
                       openLightbox(loadedHeroSrcs, idx >= 0 ? idx : 0);
                     }}
                   />
-
-                  <div className="proj-topbar">
-                    <div className="proj-topbar-avatar">{def.avatar}</div>
-                    <div style={{ flex: 1 }}>
-                      <div className="proj-topbar-name">{def.nameEl}</div>
-                      <div className="proj-topbar-loc">{def.badgeLoc}</div>
-                    </div>
-                    <div className="proj-topbar-badge">{def.badge}</div>
-                  </div>
 
                   {/* Circle thumbnails — desktop overlay */}
                   <div className="proj-thumb-row proj-thumb-row--desktop" style={{ zIndex: 4 }}>
@@ -755,7 +756,7 @@ export default function Portfolio() {
             <a href="mailto:khushidassani5@gmail.com" className="contact-email">khushidassani5@gmail.com</a>
           </div>
           <div className="rv2">
-            <div className="tracker">
+            {isAdmin && <div className="tracker">
               <span className="sec-lbl">Visitor Tracking</span>
               <h3>Generate a tracked link</h3>
               <p>Know exactly who viewed your portfolio and when.</p>
@@ -778,7 +779,7 @@ export default function Portfolio() {
                     </div>
                   ))}
               </div>
-            </div>
+            </div>}
             {!formSubmitted ? (
               <form className="cform" onSubmit={subForm}>
                 <div className="frow">
