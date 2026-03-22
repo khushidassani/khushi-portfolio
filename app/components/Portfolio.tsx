@@ -263,7 +263,8 @@ export default function Portfolio() {
   const p1 = useProjectImages(
     ["Sample Campaign Brief", "Awards", "Instagram"],
     ["/images/Schbang_1.jpg", "/images/Schbang_2.jpg", "/images/Schbang_3.jpg"],
-    ["/images/Schbang_4.jpg", "/images/Schbang Award Photo.jpg", "/images/Schbang_6.jpg"],
+    ["/images/Schbang_4.PNG", "/images/Schbang Award Photo.jpg", "/images/Schbang_6.jpg"],
+    ["https://docs.google.com/document/d/1HhEC66wDsL10MfSc_4TNmOoZbAeGj7bM/edit?usp=drive_link&ouid=114241819344773173667&rtpof=true&sd=true", "https://drive.google.com/file/d/1bE7AD7phwvUfc2eVPcdR8T4g3tvaalWn/view?usp=drive_link", "https://www.instagram.com/woknroll.india/"],
   );
   const p2 = useProjectImages(
     ["Brand Book", "Web Audit", "Testimonial"],
@@ -411,10 +412,10 @@ export default function Portfolio() {
       badge: "Nov 2024–2025",
       badgeLoc: "Bangalore, India",
       nameEl: <><span>Schbang</span> <em>· Bangalore</em></>,
-      statVal: "5M+", statLbl: "Impressions · First campaign",
+      statVal: "5M+ Reach", statLbl: "FMCG",
       client: "Schbang · Bangalore",
       titleEl: <>The<br /><em>Agency Pace</em></>,
-      desc: "I managed the workflows for three concurrent clients and their respective teams. My first campaign for the agency pulled 5 million impressions. I turned raw performance metrics into a media plan that won an India Content Leadership Award for \"Best Lifestyle Content.\"",
+      desc: "I managed the workflows for two concurrent clients externally and 3 teams internally to coordinate deliverables. I turned client requirements into actionable briefs and saw them through strategy backed pitch decks, campaign concepts and finally visual designs. My first campaign for a client gained us the 2nd highest performing campaign on their page (of all time) with 5M+ reach. I turned raw performance metrics into a strategic media plan that won us a gold at the Asia-Pacific Stevie Awards for 'The Most Innovative Instagram Page' and our women's day campaign.",
       tags: ["Campaign Management", "Cross-functional", "Performance Media", "Analytics"],
       roleEl: <em>Brand Strategist &amp; Project Coordinator</em>,
       sideLabel2: "Achievement",
