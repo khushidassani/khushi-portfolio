@@ -246,7 +246,8 @@ footer{background:var(--bd);padding:36px 5vw;display:flex;justify-content:space-
 .ppg-item.has-link::after{content:'↗';position:absolute;top:6px;right:8px;font-size:11px;color:rgba(245,240,232,.5);font-family:serif}
 .ppg-link-input{position:absolute;bottom:28px;left:4px;right:4px;z-index:10;background:rgba(20,12,10,.9);border:1px solid rgba(196,168,130,.3);padding:4px 8px;font-family:var(--font-montserrat),'Montserrat',sans-serif;font-size:8px;letter-spacing:.1em;color:rgba(245,240,232,.7);outline:none;display:none}
 .ppg-link-input.show{display:block}
-.ppg-item:hover .ppg-link-btn,.ppg-item.has-link .ppg-link-btn{opacity:1}
+.ppg-link-badge{position:absolute;top:6px;right:6px;background:rgba(20,12,10,.75);border:1px solid rgba(196,168,130,.4);color:rgba(245,240,232,.9);font-size:13px;padding:2px 7px;z-index:5;pointer-events:none}
+.ppg-item:hover .ppg-link-btn{opacity:1}
 .ppg-link-btn{position:absolute;top:6px;right:6px;opacity:0;background:rgba(20,12,10,.7);border:1px solid rgba(196,168,130,.3);color:rgba(245,240,232,.6);font-size:9px;padding:2px 6px;cursor:none;transition:opacity .2s;font-family:var(--font-montserrat),'Montserrat',sans-serif;letter-spacing:.1em;text-transform:uppercase;z-index:5}
 
 /* ── MOBILE CONTROLS STRIP (circles + stat below hero) — must be before media query ── */

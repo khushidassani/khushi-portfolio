@@ -150,7 +150,7 @@ function GridItem({ slot, idx, projId, onSetHref, onSetPos, onLightbox }: {
   const inner = (
     <div
       className={`ppg-item${slot.href ? " has-link" : ""}`}
-      onClick={slot.src ? onLightbox : undefined}
+      onClick={slot.src && !slot.href ? onLightbox : undefined}
     >
       {slot.src && <img src={slot.src} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: slot.pos }} />}
       {slot.src && <PosControl current={slot.pos} onChange={onSetPos} />}
@@ -163,13 +163,18 @@ function GridItem({ slot, idx, projId, onSetHref, onSetPos, onLightbox }: {
       {/* Label always visible at bottom */}
       <span className={`ppg-lbl${slot.src ? " ppg-lbl--filled" : ""}`}>{slot.label}</span>
 
-      {/* Image loaded: show link button */}
-      {slot.src && (
+      {/* Link indicator — always visible when href is set */}
+      {slot.href && (
+        <span className="ppg-link-badge">↗</span>
+      )}
+
+      {/* Image loaded, no hardcoded link: show link edit button */}
+      {slot.src && !slot.href && (
         <button
           className="ppg-link-btn"
           onClick={e => { e.stopPropagation(); setShowLink(v => !v); setTimeout(() => linkInputRef.current?.focus(), 50); }}
         >
-          {slot.href ? "↗" : "Link"}
+          Link
         </button>
       )}
 
