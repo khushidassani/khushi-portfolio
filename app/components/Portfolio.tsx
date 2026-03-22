@@ -165,7 +165,7 @@ function GridItem({ slot, idx, projId, onSetHref, onSetPos, onLightbox }: {
 
       {/* Link indicator — always visible when href is set */}
       {slot.href && (
-        <span className="ppg-link-badge">↗</span>
+        <span className="ppg-link-badge" />
       )}
 
       {/* Image loaded, no hardcoded link: show link edit button */}
