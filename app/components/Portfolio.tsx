@@ -422,7 +422,7 @@ export default function Portfolio() {
       badge: "Nov 2024–2025",
       badgeLoc: "Bangalore, India",
       nameEl: <><span>Schbang</span> <em>· Bangalore</em></>,
-      statVal: "5M+ Reach", statLbl: "FMCG", showStat: true,
+      statVal: "5M+ Reach", statLbl: "FMCG", showStat: false,
       client: "Schbang · Bangalore",
       titleEl: <>The<br /><em>Agency Pace</em></>,
       desc: "I managed the workflows for two concurrent clients externally and 3 teams internally to coordinate deliverables. I turned client requirements into actionable briefs and saw them through strategy-backed pitch decks, campaign concepts and visual designs. My first campaign for a client became the 2nd highest-performing post on their page of all time, with 5M+ reach. I then turned those raw performance metrics into a media plan that won gold at the Asia-Pacific Stevie Awards for Most Innovative Instagram Page, through our women's day campaign.",
