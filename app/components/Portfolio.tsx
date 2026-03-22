@@ -258,7 +258,7 @@ export default function Portfolio() {
     ["Results", "Instagram", "E-com"],
     ["/images/Kunvarani_1.jpg", "/images/Kunvarani_2.jpeg", "/images/Kunvarani_3.jpeg"],
     ["/images/Kunvarani_4.png", "/images/Kunvarani_5.JPG", "/images/Kunvarani_6.JPG"],
-    ["https://drive.google.com/file/d/11SQWiawGe80Dbi4WyBeDU47JNr_9C4B5/view?usp=sharing", "", ""],
+    ["https://drive.google.com/file/d/11SQWiawGe80Dbi4WyBeDU47JNr_9C4B5/view?usp=sharing", "https://www.instagram.com/kunvarani.in?igsh=NTVudWJyeXVnanFi&utm_source=qr", ""],
   );
   const p1 = useProjectImages(
     ["Sample Campaign Brief", "Awards", "Instagram"],
