@@ -347,7 +347,9 @@ export default function Portfolio() {
       }).catch(() => {});
     }
     setVisits(stored);
-    setIsAdmin(new URLSearchParams(window.location.search).get("admin") === "1");
+    const admin = new URLSearchParams(window.location.search).get("admin") === "1";
+    setIsAdmin(admin);
+    if (admin) document.body.classList.add("admin");
 
     return () => {
       document.removeEventListener("mousemove", onMove);
@@ -402,7 +404,7 @@ export default function Portfolio() {
       badge: "Current",
       badgeLoc: "Bangalore, India",
       nameEl: <><span>Kunvarani</span> <em>, Ongoing</em></>,
-      statVal: "Ongoing", statLbl: "Full-stack brand build",
+      statVal: "Ongoing", statLbl: "Full-stack brand build", showStat: false,
       client: "Kunvarani · Bangalore",
       titleEl: <>The Boutique<br /><em>Experience</em></>,
       desc: "I'm currently leading the identity for this fashion boutique in Bangalore. It's a lean operation where I wear every hat available: personally organising and creatively directing the photoshoots, AI editing visuals and videos, and managing the brand growth strategy. After years of avoiding code, I realised it was the only thing standing between us and a finished e-commerce website. So I built a Claude Code AI agent to help me code the platform myself. I'm now managing our digital presence and teaching myself the nuances of paid media so our digital growth keeps pace with our in-store activations.",
@@ -420,7 +422,7 @@ export default function Portfolio() {
       badge: "Nov 2024–2025",
       badgeLoc: "Bangalore, India",
       nameEl: <><span>Schbang</span> <em>· Bangalore</em></>,
-      statVal: "5M+ Reach", statLbl: "FMCG",
+      statVal: "5M+ Reach", statLbl: "FMCG", showStat: true,
       client: "Schbang · Bangalore",
       titleEl: <>The<br /><em>Agency Pace</em></>,
       desc: "I managed the workflows for two concurrent clients externally and 3 teams internally to coordinate deliverables. I turned client requirements into actionable briefs and saw them through strategy-backed pitch decks, campaign concepts and visual designs. My first campaign for a client became the 2nd highest-performing post on their page of all time, with 5M+ reach. I then turned those raw performance metrics into a media plan that won gold at the Asia-Pacific Stevie Awards for Most Innovative Instagram Page, through our women's day campaign.",
@@ -438,7 +440,7 @@ export default function Portfolio() {
       badge: "Pre-Launch",
       badgeLoc: "Remote, Hyderabad",
       nameEl: <><span>Hobby</span><em>&amp;Me</em></>,
-      statVal: "Full kit", statLbl: "End-to-end brand launch",
+      statVal: "Full kit", statLbl: "End-to-end brand launch", showStat: false,
       client: "Hobby&Me · Pre-Launch",
       titleEl: <>Building a personality before<br />the <em>product launched</em></>,
       desc: "I built the entire DNA for this DIY hobby start-up while they're still building towards launch. I wrote the brand story, designed an AI persona and mapped out every email funnel in the stack. I also audited the web content on Figma and created a product naming system. This was a complete brand launch kit, handed over and ready to go the moment they are. The 4-week project turned into a 3-month collaboration as my role was extended to develop launch content for their socials.",
@@ -456,7 +458,7 @@ export default function Portfolio() {
       badge: "2025",
       badgeLoc: "Remote, San Francisco",
       nameEl: <><span>Affairmuse</span> <em>, SF</em></>,
-      statVal: "1.56×", statLbl: "Organic growth · 8 weeks",
+      statVal: "1.56×", statLbl: "Organic growth · 8 weeks", showStat: false,
       client: "Affairmuse · Remote, US",
       titleEl: <>The Pitch That<br /><em>Brought It to Life</em></>,
       desc: "Affairmuse was a San Francisco-based startup with a clear vision and an identity that didn't reflect it yet. Working remotely from India, I partnered with the founder and developed a pitch deck that captured her brand vision end-to-end, repositioning the aesthetic toward something contemporary, authentic, and genuinely human. The founder ultimately decided to pivot her business due to supply chain constraints, but the strategy we built together was the foundation she needed to see where the brand could go. I grew her followers organically by 1.56x in eight weeks along the way.",
@@ -654,10 +656,12 @@ export default function Portfolio() {
                     ))}
                   </div>
 
-                  <div className="proj-hero-stat proj-hero-stat--desktop">
-                    <div className="phs-val">{def.statVal}</div>
-                    <div className="phs-lbl">{def.statLbl}</div>
-                  </div>
+                  {def.showStat && (
+                    <div className="proj-hero-stat proj-hero-stat--desktop">
+                      <div className="phs-val">{def.statVal}</div>
+                      <div className="phs-lbl">{def.statLbl}</div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Circles + stat — mobile strip below hero */}
@@ -676,10 +680,12 @@ export default function Portfolio() {
                       )
                     ))}
                   </div>
-                  <div className="proj-hero-stat proj-hero-stat--mobile">
-                    <div className="phs-val">{def.statVal}</div>
-                    <div className="phs-lbl">{def.statLbl}</div>
-                  </div>
+                  {def.showStat && (
+                    <div className="proj-hero-stat proj-hero-stat--mobile">
+                      <div className="phs-val">{def.statVal}</div>
+                      <div className="phs-lbl">{def.statLbl}</div>
+                    </div>
+                  )}
                 </div>
 
                 <div className="proj-body">
