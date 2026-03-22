@@ -270,6 +270,7 @@ export default function Portfolio() {
     ["Brand Book", "Web Audit", "Testimonial"],
     ["/images/Hobby&Me_1.JPG", "/images/Hobby&Me_2.png", "/images/Hobby&Me_3.PNG"],
     ["/images/Hobby&Me_4.PNG", "/images/Hobby&Me_5.PNG", "/images/Hobby&Me_6.png"],
+    ["https://docs.google.com/document/d/1UNqGF2N7d_Ev8CVp9tYgjD4kI2U2P3TizcKd8zjxV9s/edit?usp=sharing", "https://drive.google.com/file/d/1itB5_fnFqTh6foOKUvYS_T3BwR6Y70PD/view?usp=sharing", ""],
   );
   const p3 = useProjectImages(
     ["Pitch Deck", "Social", "Identity"],
