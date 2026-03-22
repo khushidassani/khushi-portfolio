@@ -276,6 +276,7 @@ export default function Portfolio() {
     ["Pitch Deck", "Social", "Identity"],
     ["/images/Affairmuse_1.jpg", "/images/Affairmuse_2.JPG", "/images/Affairmuse_3.jpg"],
     ["/images/Affairmuse_4.JPG", "/images/Affairmuse_5.jpg", "/images/Affairmuse_6.jpg"],
+    ["https://drive.google.com/file/d/1lBD4mcyyYLhCKkJR8YMBONnDYD2ZXl_P/view?usp=sharing", "", "https://docs.google.com/document/d/10SEDlYMRWcC5cv1dYymmPb_4RxIq79ad4yI8kRhAwZs/edit?usp=drive_link"],
   );
   const projects = [p0, p1, p2, p3];
 
@@ -398,7 +399,7 @@ export default function Portfolio() {
       statVal: "Ongoing", statLbl: "Full-stack brand build",
       client: "Kunvarani · Bangalore",
       titleEl: <>The Boutique<br /><em>Experience</em></>,
-      desc: "I'm currently leading the identity for this fashion boutique in Bangalore. It's a lean operation where I wear every hat available — personally organising and creatively directing the photoshoots, AI editing visuals and videos, and most importantly, managing the brand growth strategy. After years of avoiding code, I realised it was the only thing standing between us and a finished e-commerce website. So I built a Claude Code AI agent to help me code the platform myself. I'm now managing our digital presence and teaching myself the nuances of paid media to ensure our growth scales as fast as our in-store activations.",
+      desc: "I'm currently leading the identity for this fashion boutique in Bangalore. It's a lean operation where I wear every hat available — personally organising and creatively directing the photoshoots, AI editing visuals and videos, and managing the brand growth strategy. After years of avoiding code, I realised it was the only thing standing between us and a finished e-commerce website. So I built a Claude Code AI agent to help me code the platform myself. I'm now managing our digital presence and teaching myself the nuances of paid media so our digital growth keeps pace with our in-store activations.",
       tags: ["Brand Strategy", "Creative Direction", "AI E-com", "Paid Media", "Photography"],
       roleEl: <em>Brand &amp; Growth Strategist</em>,
       sideLabel2: "Scope",
@@ -416,11 +417,11 @@ export default function Portfolio() {
       statVal: "5M+ Reach", statLbl: "FMCG",
       client: "Schbang · Bangalore",
       titleEl: <>The<br /><em>Agency Pace</em></>,
-      desc: "I managed the workflows for two concurrent clients externally and 3 teams internally to coordinate deliverables. I turned client requirements into actionable briefs and saw them through strategy backed pitch decks, campaign concepts and finally visual designs. My first campaign for a client gained us the 2nd highest performing campaign on their page (of all time) with 5M+ reach. I turned raw performance metrics into a strategic media plan that won us a gold at the Asia-Pacific Stevie Awards for 'The Most Innovative Instagram Page' and our women's day campaign.",
+      desc: "I managed the workflows for two concurrent clients externally and 3 teams internally to coordinate deliverables. I turned client requirements into actionable briefs and saw them through strategy-backed pitch decks, campaign concepts and visual designs. My first campaign for a client became the 2nd highest-performing post on their page of all time, with 5M+ reach. I then turned those raw performance metrics into a media plan that won gold at the Asia-Pacific Stevie Awards for Most Innovative Instagram Page — our women's day campaign.",
       tags: ["Campaign Management", "Cross-functional", "Performance Media", "Analytics"],
       roleEl: <em>Brand Strategist &amp; Project Coordinator</em>,
       sideLabel2: "Achievement",
-      sideVal2: "India Content Leadership Award — Best Lifestyle Content",
+      sideVal2: "Asia-Pacific Stevie Award — Most Innovative Instagram Page",
       stats: [{ n: "2", l: "Clients" }, { n: "5M+", l: "Reach" }, { n: "3", l: "Awards" }],
     },
     {
@@ -434,7 +435,7 @@ export default function Portfolio() {
       statVal: "Full kit", statLbl: "End-to-end brand launch",
       client: "Hobby&Me · Pre-Launch",
       titleEl: <>Building a personality before<br />the <em>product launched</em></>,
-      desc: "I built the entire DNA for this DIY hobby start-up while they're pre-launch building towards it. I wrote the brand story, designed an AI persona and mapped out every email funnel in the stack. I also audited the web content on Figma and created a product naming system. This was a complete brand launch kit, handed over and ready to go the moment they are. The 4 week project turned into a 3 month collaboration as my role was extended to kickstart post concepts for their launch on socials.",
+      desc: "I built the entire DNA for this DIY hobby start-up while they're still building towards launch. I wrote the brand story, designed an AI persona and mapped out every email funnel in the stack. I also audited the web content on Figma and created a product naming system. This was a complete brand launch kit, handed over and ready to go the moment they are. The 4-week project turned into a 3-month collaboration as my role was extended to develop launch content for their socials.",
       tags: ["Brand Book", "Launch Strategy", "Email Marketing", "AI Persona"],
       roleEl: <em>Brand Identity &amp; Strategy</em>,
       sideLabel2: "Deliverables",
@@ -452,7 +453,7 @@ export default function Portfolio() {
       statVal: "1.56×", statLbl: "Organic growth · 8 weeks",
       client: "Affairmuse · Remote, US",
       titleEl: <>The Pitch That<br /><em>Brought It to Life</em></>,
-      desc: "Affairmuse was a San Francisco based startup with a clear vision and an identity that didn't reflect it yet. Working remotely from India, I partnered with the founder and developed a pitch deck that captured her brand vision end-to-end, repositioning the aesthetic toward something contemporary, authentic and with human connection. The founder ultimately decided to pivot her business due to supply chain constraints, but the strategy we built together was the foundation she needed to see where the brand could go. I grew her followers organically by 1.56x in eight weeks along the way.",
+      desc: "Affairmuse was a San Francisco-based startup with a clear vision and an identity that didn't reflect it yet. Working remotely from India, I partnered with the founder and developed a pitch deck that captured her brand vision end-to-end, repositioning the aesthetic toward something contemporary, authentic, and genuinely human. The founder ultimately decided to pivot her business due to supply chain constraints, but the strategy we built together was the foundation she needed to see where the brand could go. I grew her followers organically by 1.56x in eight weeks along the way.",
       tags: ["Brand Strategy", "Visual Identity", "Organic Social", "Pitch Deck"],
       roleEl: <em>Brand Strategist</em>,
       sideLabel2: "Scope",
@@ -576,9 +577,9 @@ export default function Portfolio() {
           <h2>The<br /><em>Backstage Pass</em></h2>
         </div>
         <div className="about-r rv2">
-          <p>I moved to the UK at eighteen with enough money to cover only half a year&apos;s rent. To cover the rest, I worked two jobs, and when that wasn&apos;t quite enough, I picked up a camera and started taking photography among other gigs to find exactly where my interests and skills collided. I graduated from the University of Nottingham. I also figured out very early that I can learn pretty much anything if I have to.</p>
+          <p>I moved to the UK at eighteen with enough money to cover only half a year&apos;s rent. To cover the rest, I worked two jobs, and when that wasn&apos;t quite enough, I picked up a camera and started shooting alongside other gigs to find exactly where my interests and skills collided. I graduated from the University of Nottingham. I also figured out very early that I can learn pretty much anything if I have to.</p>
           <p>That turned out to be the most useful thing a degree could have taught me.</p>
-          <p>Since then I&apos;ve built brand identities in the UK, India, and for a startup in San Francisco. My approach to strategy tends to involve actually building an expertise of other roles first: directing shoots, writing copy, auditing websites on Figma, and most recently (I&apos;ve been showing this off to everyone!), building an AI agent to help code an e-commerce site. It wasn&apos;t really my job but rather, because the brand needed it and I was a one-person team driven to make it happen.</p>
+          <p>Since then I&apos;ve built brand identities in the UK, India, and for a startup in San Francisco. My approach to strategy tends to involve actually building expertise in other roles first: directing shoots, writing copy, auditing websites on Figma, and most recently (I&apos;ve been showing this off to everyone!), building an AI agent to help code an e-commerce site. It wasn&apos;t really my job — but the brand needed it, and I was a one-person team.</p>
           <p>I&apos;m not the strategist who hands you a deck and wishes you luck.</p>
           <div className="about-sig">— Khushi</div>
         </div>
