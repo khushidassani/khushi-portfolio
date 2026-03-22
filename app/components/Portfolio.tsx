@@ -13,14 +13,14 @@ interface ProjectImages {
 }
 
 /* ── Per-project image hook ── */
-function useProjectImages(gridLabels: string[], initialHero: string[] = [], initialGrid: string[] = []) {
+function useProjectImages(gridLabels: string[], initialHero: string[] = [], initialGrid: string[] = [], initialHrefs: string[] = []) {
   const [images, setImages] = useState<ProjectImages>({
     hero: [
       { src: initialHero[0] ?? null, pos: "center" },
       { src: initialHero[1] ?? null, pos: "center" },
       { src: initialHero[2] ?? null, pos: "center" },
     ],
-    grid: gridLabels.map((l, i) => ({ src: initialGrid[i] ?? null, href: "", label: l, pos: "center" })),
+    grid: gridLabels.map((l, i) => ({ src: initialGrid[i] ?? null, href: initialHrefs[i] ?? "", label: l, pos: "center" })),
     active: 0,
   });
   const pausedRef = useRef(false);
@@ -251,8 +251,9 @@ export default function Portfolio() {
   /* Per-project image galleries */
   const p0 = useProjectImages(
     ["Results", "Instagram", "E-com"],
-    ["/images/Kunvarani_1.jpg", "/images/Kunvarani_2.jpeg", "/images/Kunvarani_3.jpg"],
-    ["/images/Kunvarani_4.jpeg", "/images/Kunvarani_5.JPG", "/images/Kunvarani_6.JPG"],
+    ["/images/Kunvarani_1.jpg", "/images/Kunvarani_2.jpeg", "/images/Kunvarani_3.jpeg"],
+    ["/images/Kunvarani_4.png", "/images/Kunvarani_5.JPG", "/images/Kunvarani_6.JPG"],
+    ["https://drive.google.com/file/d/11SQWiawGe80Dbi4WyBeDU47JNr_9C4B5/view?usp=sharing", "", ""],
   );
   const p1 = useProjectImages(
     ["Sample Campaign Brief", "Awards", "Instagram"],
