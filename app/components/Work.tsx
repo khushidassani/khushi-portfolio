@@ -10,6 +10,7 @@ const projects = [
     label: "I",
     ornament: "♠",
     location: "SAN FRANCISCO",
+    image: null,
   },
   {
     num: "02 / 03",
@@ -18,6 +19,7 @@ const projects = [
     label: "II",
     ornament: "♦",
     location: "HYDERABAD",
+    image: null,
   },
   {
     num: "03 / 03",
@@ -26,6 +28,7 @@ const projects = [
     label: "III",
     ornament: "♣",
     location: "BANGALORE",
+    image: "/images/IMG_9460.PNG",
   },
 ];
 
@@ -92,38 +95,7 @@ function Card2() {
   );
 }
 
-function Card3() {
-  return (
-    <svg viewBox="0 0 400 530" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" className="w-full h-full">
-      <defs>
-        <linearGradient id="g3a" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#2C2520" />
-          <stop offset="100%" stopColor="#5C5048" />
-        </linearGradient>
-      </defs>
-      <rect width="400" height="530" fill="url(#g3a)" />
-      <circle cx="200" cy="195" r="100" fill="none" stroke="#C4A882" strokeWidth="0.4" opacity="0.2" />
-      <circle cx="200" cy="195" r="75" fill="none" stroke="#C4A882" strokeWidth="0.4" opacity="0.2" />
-      <circle cx="200" cy="195" r="50" fill="none" stroke="#C4A882" strokeWidth="0.4" opacity="0.2" />
-      <line x1="200" y1="95" x2="200" y2="75" stroke="#C4A882" strokeWidth="0.6" opacity="0.25" />
-      <line x1="270" y1="125" x2="283" y2="111" stroke="#C4A882" strokeWidth="0.6" opacity="0.25" />
-      <line x1="300" y1="195" x2="320" y2="195" stroke="#C4A882" strokeWidth="0.6" opacity="0.25" />
-      <line x1="270" y1="265" x2="283" y2="279" stroke="#C4A882" strokeWidth="0.6" opacity="0.25" />
-      <line x1="200" y1="295" x2="200" y2="315" stroke="#C4A882" strokeWidth="0.6" opacity="0.25" />
-      <line x1="130" y1="265" x2="117" y2="279" stroke="#C4A882" strokeWidth="0.6" opacity="0.25" />
-      <line x1="100" y1="195" x2="80" y2="195" stroke="#C4A882" strokeWidth="0.6" opacity="0.25" />
-      <line x1="130" y1="125" x2="117" y2="111" stroke="#C4A882" strokeWidth="0.6" opacity="0.25" />
-      <text x="200" y="185" textAnchor="middle" fontFamily="Georgia, serif" fontSize="28" fill="#D4BC9A" opacity="0.18" fontStyle="italic">5M+</text>
-      <text x="200" y="208" textAnchor="middle" fontFamily="Georgia, serif" fontSize="9" letterSpacing="4" fill="#C4A882" opacity="0.3">IMPRESSIONS</text>
-      <path d="M160 340 L200 310 L240 340 L230 385 L200 375 L170 385 Z" fill="none" stroke="#C4A882" strokeWidth="0.7" opacity="0.25" />
-      <circle cx="200" cy="345" r="16" fill="none" stroke="#C4A882" strokeWidth="0.6" opacity="0.2" />
-      <text x="200" y="350" textAnchor="middle" fontFamily="Georgia, serif" fontSize="9" fill="#D4BC9A" opacity="0.35">★</text>
-      <text x="200" y="450" textAnchor="middle" fontFamily="Georgia, serif" fontSize="11" letterSpacing="5" fill="#D4BC9A" opacity="0.4">BANGALORE</text>
-    </svg>
-  );
-}
-
-const cardSVGs = [Card1, Card2, Card3];
+const cardSVGs = [Card1, Card2];
 
 export default function Work() {
   return (
@@ -160,9 +132,18 @@ export default function Work() {
                   className="group relative overflow-hidden"
                   style={{ aspectRatio: "3/4" }}
                 >
-                  {/* SVG background with scale on hover */}
+                  {/* Card background: photo or SVG */}
                   <div className="w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:scale-105">
-                    <SVG />
+                    {project.image ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+                      />
+                    ) : (
+                      <SVG />
+                    )}
                   </div>
 
                   {/* Default label */}

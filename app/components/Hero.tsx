@@ -50,14 +50,28 @@ export default function Hero() {
         </motion.p>
       </div>
 
-      {/* ── RIGHT: Cream ── */}
+      {/* ── RIGHT: Profile photo ── */}
       <div className="relative bg-[#F5F0E8] hidden md:block overflow-hidden">
-        <div className="absolute inset-0 flex flex-col justify-center px-[60px]">
+        {/* Photo */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/IMG_4732.JPG"
+          alt="Khushi Dassani"
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }}
+        />
+        {/* Gradient overlay so text is legible */}
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(to top, rgba(20,12,10,0.55) 0%, transparent 55%)" }}
+        />
+
+        {/* Text at bottom */}
+        <div className="absolute inset-0 flex flex-col justify-end px-[60px] pb-[60px]">
           <motion.p
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="font-[family-name:var(--font-cormorant)] text-[13px] tracking-[0.3em] uppercase text-[#7A8C6E] mb-6"
+            className="font-[family-name:var(--font-cormorant)] text-[13px] tracking-[0.3em] uppercase text-[#D4BC9A] mb-4"
           >
             Fashion · Lifestyle · Consumer Brands
           </motion.p>
@@ -65,22 +79,13 @@ export default function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.0 }}
-            className="font-[family-name:var(--font-cormorant)] font-light leading-[1.7] text-[#2C2520] max-w-[380px]"
-            style={{ fontSize: "clamp(18px, 2.5vw, 26px)" }}
+            className="font-[family-name:var(--font-cormorant)] font-light leading-[1.7] text-[#F5F0E8] max-w-[380px]"
+            style={{ fontSize: "clamp(18px, 2.5vw, 26px)", opacity: 0.9 }}
           >
             International experience. Intentional strategy. Always rooted in
             timeless elegance.
           </motion.p>
         </div>
-
-        {/* ♠ watermark */}
-        <span
-          aria-hidden
-          className="absolute bottom-[-20px] right-[30px] font-[family-name:var(--font-cormorant)] font-light leading-none select-none pointer-events-none"
-          style={{ fontSize: 160, color: "rgba(107,31,42,0.06)" }}
-        >
-          ♠
-        </span>
       </div>
 
       {/* ── Scroll indicator ── */}
