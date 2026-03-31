@@ -136,10 +136,31 @@ function TrackerBox() {
 
 function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
+  const [fields, setFields] = useState({ name: "", email: "", subject: "", message: "" });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFields((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSending(true);
+    setError("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(fields),
+      });
+      if (!res.ok) throw new Error();
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong — please try emailing me directly.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -153,7 +174,10 @@ function ContactForm() {
               </label>
               <input
                 type="text"
+                name="name"
                 required
+                value={fields.name}
+                onChange={handleChange}
                 placeholder="Your name"
                 className="border-0 border-b border-[#6B1F2A]/20 bg-transparent py-3 font-[family-name:var(--font-eb-garamond)] text-[17px] text-[#2C2520] outline-none focus:border-[#6B1F2A] transition-colors duration-300 placeholder:opacity-30 placeholder:italic"
               />
@@ -164,7 +188,10 @@ function ContactForm() {
               </label>
               <input
                 type="email"
+                name="email"
                 required
+                value={fields.email}
+                onChange={handleChange}
                 placeholder="your@email.com"
                 className="border-0 border-b border-[#6B1F2A]/20 bg-transparent py-3 font-[family-name:var(--font-eb-garamond)] text-[17px] text-[#2C2520] outline-none focus:border-[#6B1F2A] transition-colors duration-300 placeholder:opacity-30 placeholder:italic"
               />
@@ -176,6 +203,9 @@ function ContactForm() {
             </label>
             <input
               type="text"
+              name="subject"
+              value={fields.subject}
+              onChange={handleChange}
               placeholder="What's on your mind?"
               className="border-0 border-b border-[#6B1F2A]/20 bg-transparent py-3 font-[family-name:var(--font-eb-garamond)] text-[17px] text-[#2C2520] outline-none focus:border-[#6B1F2A] transition-colors duration-300 placeholder:opacity-30 placeholder:italic"
             />
@@ -186,19 +216,27 @@ function ContactForm() {
             </label>
             <textarea
               rows={5}
+              name="message"
+              required
+              value={fields.message}
+              onChange={handleChange}
               placeholder="Tell me about your project..."
               className="border-0 border-b border-[#6B1F2A]/20 bg-transparent py-3 font-[family-name:var(--font-eb-garamond)] text-[17px] text-[#2C2520] outline-none focus:border-[#6B1F2A] transition-colors duration-300 placeholder:opacity-30 placeholder:italic resize-none w-full"
             />
           </div>
+          {error && (
+            <p className="italic text-[13px] text-[#6B1F2A] opacity-80">{error}</p>
+          )}
           <div className="flex justify-between items-center mt-5 flex-col sm:flex-row gap-4">
             <p className="italic text-[13px] opacity-40 max-w-[300px] leading-[1.6]">
               Each message is read with care and replied to personally.
             </p>
             <button
               type="submit"
-              className="bg-[#6B1F2A] text-[#F5F0E8] px-8 py-[14px] font-[family-name:var(--font-montserrat)] text-[10px] tracking-[0.25em] uppercase hover:bg-[#4A1219] transition-colors duration-300"
+              disabled={sending}
+              className="bg-[#6B1F2A] text-[#F5F0E8] px-8 py-[14px] font-[family-name:var(--font-montserrat)] text-[10px] tracking-[0.25em] uppercase hover:bg-[#4A1219] transition-colors duration-300 disabled:opacity-50"
             >
-              Send Message
+              {sending ? "Sending…" : "Send Message"}
             </button>
           </div>
         </form>
@@ -261,7 +299,7 @@ export default function Contact() {
           className="font-[family-name:var(--font-montserrat)] text-[9px] tracking-[0.25em] uppercase text-[#F5F0E8]"
           style={{ opacity: 0.3 }}
         >
-          khushidassani5@gmail.com · © 2026
+          khushidassani5@gmail.com · +91 95356 98942 · © 2026
         </span>
       </footer>
     </>
