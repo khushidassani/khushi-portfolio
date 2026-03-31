@@ -389,8 +389,19 @@ export default function Portfolio() {
     return d.toLocaleDateString("en-GB", { day: "numeric", month: "short" }) + " · " + d.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
   };
 
-  const subForm = (e: React.FormEvent<HTMLFormElement>) => {
+  const subForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
+    const name = (form.elements.namedItem("name") as HTMLInputElement).value;
+    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+    const message = (form.elements.namedItem("message") as HTMLTextAreaElement).value;
+    try {
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+    } catch { /* fail silently */ }
     setFormSubmitted(true);
   };
 
@@ -804,10 +815,10 @@ export default function Portfolio() {
             {!formSubmitted ? (
               <form className="cform" onSubmit={subForm}>
                 <div className="frow">
-                  <div className="fg"><label>Name</label><input type="text" placeholder="Your name" required /></div>
-                  <div className="fg"><label>Email</label><input type="email" placeholder="your@email.com" required /></div>
+                  <div className="fg"><label>Name</label><input type="text" name="name" placeholder="Your name" required /></div>
+                  <div className="fg"><label>Email</label><input type="email" name="email" placeholder="your@email.com" required /></div>
                 </div>
-                <div className="fg"><label>Message</label><textarea rows={4} placeholder="Tell me about your project..." /></div>
+                <div className="fg"><label>Message</label><textarea name="message" rows={4} placeholder="Tell me about your project..." /></div>
                 <div className="fsub">
                   <p className="fnote">Each message is read personally.</p>
                   <button type="submit" className="btn">Send</button>
@@ -821,7 +832,7 @@ export default function Portfolio() {
 
       <footer>
         <div className="flogo">Khushi Dassani</div>
-        <div className="fnote-f">khushidassani5@gmail.com · © 2026</div>
+        <div className="fnote-f">khushidassani5@gmail.com · +91 95356 98942 · © 2026</div>
       </footer>
     </>
   );
